@@ -5,18 +5,20 @@ from django.db import models
 
 class Genre(models.Model):
 
-    name=models.CharField(max_length=100,verbose_name="Назва жанру")
+    name=models.CharField(max_length=100,verbose_name="Назва жанру",unique=True)
     def __str__(self):
         return self.name
 
-class BandOrArtist(models.Model):
-    title=models.CharField(max_length=100,verbose_name="Назва виконавця")
+class Artists(models.Model):
+    name=models.CharField(max_length=100,verbose_name="Назва виконавця")
     genre=models.ManyToManyField(Genre,verbose_name="Жанри")
     description=models.TextField(max_length=5000,verbose_name="Опис артиста")
     year_formed=models.PositiveIntegerField(verbose_name="Дата створення гурту або артиста",
                                             validators=[MinValueValidator(1900),
                                             MaxValueValidator(2026)]),
     image=models.ImageField(upload_to='BandOrArtistImage/',verbose_name="Фото артиста")
+
+
 
 class Release(models.Model):
     TYPE_CHOICES=[
@@ -25,7 +27,7 @@ class Release(models.Model):
         ('Single',"Сингл"),
     ]
     release_type=models.CharField(max_length=50,verbose_name="Тип релізу",choices=TYPE_CHOICES)
-    band_or_artist=models.ForeignKey(to=BandOrArtist,on_delete=models.PROTECT,verbose_name='Гурт або виконавець')
+    artists=models.ForeignKey(to=Artists,on_delete=models.PROTECT,verbose_name='Гурт або виконавець')
     name=models.CharField(max_length=50,verbose_name='Назва релізу')
     release_date=models.DateField(verbose_name="Дата видання релізу",)
     release_description=models.CharField(max_length=500,verbose_name="Опис релізу")
