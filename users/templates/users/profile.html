@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCKTYPE HTML>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Profile</title>
+
+    <link rel="stylesheet" href="{% static 'users/css/profile.css' %}">
+</head>
+
+ <body>
+    <div class="profile-card">
+            <!-- Шапка профілю і аватарка -->
+        <div class="profile-header">
+            <div class="avatar-wrapper">
+
+                <div class="avatar-placeholder">
+                    {% if user.image %}
+                    <img src="{{ users-avatar.url }}">
+
+                    <span> {{user.username|slice:'1'|upper}}</span>
+                </div>
+            </div>
+
+
+
+                    <!--Форма редагування профілю-->
+
+            <form method="post" enctype="multipart/form-data" class="profile-form">
+                {% csrf_token %}
+
+                        <!--Вивід помилок форми-->
+                {% if form.non_field_errors %}
+                <div class='form-errors'>
+                    {{form.non_field_errors%}
+                </div>
+                {%endif%}
+
+
+                        <!-- Вивід помилок -->
+                {% for field in form %}
+            <div class="form-group">
+                <label for='{{field.id_for_label}}'>{{field.label}}</label>
+                {{field}}
+                {% if field_errors %}
+
+            <div class="field-error">
+                {{field.errors.0}}
+            </div>
+            </div>
+                {%endif%}
+                {%endfor%}
+            <button type="submit" class="btn-save">Save</button>
+            </form>
+                        <!--Кнопка виходу-->
+        <div class="profile-footer">
+            <form action="{% url 'users:logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn-logout">Logout</button>
+            </form>
+        </div>
+        </div>
+    </div>
+ </body>
+</html>
+
+
+
+
+
+
+
+
+

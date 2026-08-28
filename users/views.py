@@ -29,6 +29,7 @@ class UserLoginView(LoginView):
     form_class = UserLoginForm
     success_url=reverse_lazy('users:login')
     extra_context = {"title":"Авторизація"}
+
     def form_valid(self,form):
         username=form.cleaned_data.get('username')
         messages.success(self.request, f" {username} Ви успішно авторизувались!")
@@ -37,7 +38,6 @@ class UserLoginView(LoginView):
 
 
 class UserProfileView(LoginRequiredMixin,UpdateView):
-    model=User
     template_name = 'users/profile.html'
     form_class=ProfileForm
     extra_context={'title':"Профіль користувача"}

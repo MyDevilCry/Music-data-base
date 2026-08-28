@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d7285208-19ea-46a3-9fa4-b673ba485115" name="Изменения" comment="Перший коміт : Роблю форми , реєстрація , профіль і тд...">
-      <change afterPath="$PROJECT_DIR$/artists/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/static/users/css/style.login.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/static/users/css/style.registration.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/templates/users/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/templates/users/profile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/templates/users/registration.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
+    <list default="true" id="d7285208-19ea-46a3-9fa4-b673ba485115" name="Изменения" comment="Коміт : Зробив реєстрацію та логін (форми)">
+      <change afterPath="$PROJECT_DIR$/main/static/main/css/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/templates/main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/static/users/css/profile.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/artists/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/artists/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/artists/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/artists/models.py" afterDir="false" />
@@ -17,6 +14,12 @@
       <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/static/users/css/style.login.css" beforeDir="false" afterPath="$PROJECT_DIR$/users/static/users/css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/static/users/css/style.registration.css" beforeDir="false" afterPath="$PROJECT_DIR$/users/static/users/css/registration.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/registration.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,6 +38,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;MyDevilCry&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/MyDevilCry/Music-data-base&quot;,
+    &quot;accountId&quot;: &quot;a3b39a98-adf1-4207-a846-9efa5cb672ff&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -52,8 +67,21 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;repository&quot;
+    ]
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jane2\PycharmProjects\music_data_base\media\artists" />
+      <recent name="C:\Users\jane2\PycharmProjects\music_data_base\media" />
+      <recent name="C:\Users\jane2\PycharmProjects\music_data_base\main\static\main" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -85,11 +113,20 @@
       <option name="project" value="LOCAL" />
       <updated>1786893792997</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Коміт : Зробив реєстрацію та логін (форми)">
+      <option name="closed" value="true" />
+      <created>1787482872826</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1787482872826</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Перший коміт : Роблю форми , реєстрація , профіль і тд..." />
-    <option name="LAST_COMMIT_MESSAGE" value="Перший коміт : Роблю форми , реєстрація , профіль і тд..." />
+    <MESSAGE value="Коміт : Зробив реєстрацію та логін (форми)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Коміт : Зробив реєстрацію та логін (форми)" />
   </component>
 </project>
