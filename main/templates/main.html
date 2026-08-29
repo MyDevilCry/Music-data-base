@@ -31,6 +31,7 @@
         <h2 class="section-title"> Artists</h2>
         <div class="grid-container artists grid">
             {% for artist in artists %}
+        <a href="{% url 'artists:artists_detail' artist.slug %}" style="text-decoration: none; color: inherit;">
             <div class="artists-card">
                 <div class="avatar-circle">
                     {% if artist.image %}
@@ -68,8 +69,8 @@
                 {% for release in random_release %}
                 <div class="album-card">
                  <div class="cover-wrapper">
-                     {% if release.image %}
-                     <img src="{{ release.image.url }}" alt="{{release.name}}">
+                     {% if release.release_image %}
+                     <img src="{{ release.release_image.url }}" alt="{{release.name}}">
                      {% else %}
                      <div class="cover-placeholder">🎵</div>
                      {% endif %}

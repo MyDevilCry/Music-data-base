@@ -1,0 +1,33 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Artist detail</title>
+</head>
+<body>
+
+<header class='navbar'>
+        <div class="logo">Artist detail</div>
+        <nav class="nav-links">
+            {% if user %}
+        <a href="{% url 'users:profile' %}" class="btn-profile">{{user.username}}</a>
+        {% else %}
+        <a href="{% url 'users:login' %}" class="btn-login">Login</a>
+        {% endif %}
+
+        </nav>
+</header>
+
+    <div class="artist-detail">
+    <h1>{{ artist.name }}</h1>
+    <div class="avatar-circle">
+      {% if artist.image %}
+        <img src="{{ artist.image.url }}" alt="{{ artist.name }}">
+      {% else %}
+        <span>{{ artist.name|slice:':1' }}</span>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>

@@ -65,7 +65,7 @@ body {
 
 /* Грид сітка для Виконавців */
 .grid-container {
-    display: grid;
+    display: flex;
     gap: 20px;
 }
 
@@ -73,9 +73,9 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
 }
 
-.artist-card {
-    display: flex;
-    flex-direction: column;
+.artists-card {
+    display: row;
+    flex-direction: row;
     align-items: center;
     text-align: center;
     cursor: pointer;

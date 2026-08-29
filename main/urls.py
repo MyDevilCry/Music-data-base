@@ -6,6 +6,6 @@ app_name='main'
 
 urlpatterns = [
 
-    path('',views.MainView.as_view(),name='main')
+    path('',views.MainView.as_view(),name='main'),
 
 ]

@@ -1,10 +1,9 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
-
+from django.views.generic import CreateView, ListView, DetailView
 
 from artists.forms import CreateGenreForm, AddArtistsForm
 from artists.models import Artists, Release
@@ -17,6 +16,7 @@ class BandOrArtistView(ListView):
     template_name='artists/artists.html'
     context_object_name='artists'
     extra_context={'title':'artists'}
+
 
 @login_required
 def add_artists(request):
@@ -31,6 +31,14 @@ def add_artists(request):
     return render(request, 'artists/add_artists.html',{'form':form})
 
 
+class ArtistsDetailView(DetailView):
+    model= Artists
+    template_name='artists_detail.html'
+    context_object_name = 'artist'
+
+    def artist_detail_view(self,request,slug):
+        artists=get_object_or_404(Artists,slug=slug)
+        return render(request,'artists_detail.html',{'artist':artists})
 
 
 
@@ -61,6 +69,14 @@ class ReleasesView(ListView):
         context=super().get_context_data(**kwargs)
         context['random_release'] = Release.objects.all()
         return context
+
+class ReleasesDetailView(DetailView):
+    model=Release
+    template_name='artists/release_detail.html'
+
+    def release_detail_view(self,request,slug):
+        release=get_object_or_404(Release,slug=slug)
+        return render(request,'artists/release_detail.html',{'release':release})
 
 
 
