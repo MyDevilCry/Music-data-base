@@ -1,0 +1,33 @@
+/* Додай це у свій файл styles.css */
+
+/* Збереження однакових пропорцій та обрізка фото */
+.object-fit-cover {
+    object-fit: cover;
+}
+
+/* Ефект підняття картки альбому при наведенні */
+.hover-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Стилізація кнопок дій */
+.btn-primary {
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+}
+
+.btn-primary:hover {
+    background-color: #59359a;
+    border-color: #59359a;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+}

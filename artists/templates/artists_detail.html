@@ -1,33 +1,114 @@
+{% extends 'main.html' %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Artist detail</title>
-</head>
-<body>
 
-<header class='navbar'>
-        <div class="logo">Artist detail</div>
-        <nav class="nav-links">
-            {% if user %}
-        <a href="{% url 'users:profile' %}" class="btn-profile">{{user.username}}</a>
-        {% else %}
-        <a href="{% url 'users:login' %}" class="btn-login">Login</a>
+
+{% block content %}
+<div class="contaiter py-4 text-white">
+                <!-- Верхній блок: Інформація про артиста -->
+    <div class="row align-items-center mb-5 bg-dark p-4 rounded-4 shadow">
+        <div class="col-md-4 col-lg-3 text-center mb-3 mb-md-0">
+            {% if artist.image %}
+            <img src="{{ artist.image.url }}" alt="{{ artist.name }}" class="img-fluid rounded-circle shadow-lg object-fit-cover" style="width: 200px; height: 200px;">
+            {% else %}
+            <img src="{% static 'images/default_artist.png' %}" alt="{{ artist.name }}" class="img-fluid rounded-circle shadow-lg object-fit-cover" style="width: 200px; height: 200px;">
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="col-md-8 col-lg-9">
+    <div class="d-flex justify-content-beetween align-items-stars flex-wrap gap-2">
+        <h1 class="display-4 fw-bold mb-2">{{artist.name}}</h1>
+
+                        <!-- Жанри -->
+<div class="mb-3">
+    {% for genre in artist.genres.all %}
+    <span class="badge bg-secondary me-1 f-6">{{genre.name}}</span>
+    {% empty %}
+    <span class="text-muted">There is no genres</span>
+    {% endfor %}
+</div>
+    </div>
+
+
+<!-- Кнопка добавлення в бібліотеку -->
+
+<div>
+    {% if user.is_authenticated %}
+    <form action="">
+        {% csrf_token %}
+        {% if is_favorite %}
+        <button type="submit" class="btn-btn-outline-danger btn-lg rounded-pill">
+            <i class="fa-solid fa plus me-2"></i> Add to library
+        </button>
         {% endif %}
+        </form>
+    {% else %}
+    <a href="{% url 'users:login' %}" class="btn-btn-outline-light btn-lg rounded-pill">
+        <i class="fa-solid fa-plus me-2"></i> Log in to add
+    </a>
+    {% endif %}
+</div>
+    </div>
 
-        </nav>
-</header>
+                    <!-- Кнопка добавлення в бібліотеку -->
+<div>
+    {% if user.is_autheticated %}
+    <form action="">
+        {% csrf_token %}
+        {% if is_favorite %}
+        <button type="submit" class="btn btn-outline-danger btn-lg rounded-pill">
+            <i class="fa-solid fa-heart-circle-minus me-2"></i> Remove from library
+        </button>
+        {% else %}
+        <button type="submit" class="btn btn-primary btn-lg rounded-pill">
+            <i class="fa-solid fa-plus me-2"></i> Add to library
+        </button>
+        {% endif %}
+    </form>
+    {% else %}
+    <a href="{% url 'users:login' %}" class="btn btn-outline-light btn-lg rounded-pill">
+        <i class="fa-solid fa-plus me-2"></i> Log in to add
+    </a>
+    {% endif %}
+</div>
 
-    <div class="artist-detail">
-    <h1>{{ artist.name }}</h1>
-    <div class="avatar-circle">
-      {% if artist.image %}
-        <img src="{{ artist.image.url }}" alt="{{ artist.name }}">
-      {% else %}
-        <span>{{ artist.name|slice:':1' }}</span>
-      {% endif %}
+                <!-- Біографія -->
+<div class="mt-3">
+    <h5 class="text-uppercase text-muted fs-6">Biography</h5>
+    <p class="lh-base text-light opacity-75">
+        {% if artist.bio %}
+            {{ artist.bio|linebreaks }}
+        {% else %}
+        There is no information about artist.
+        {% endif %}
+    </p>
+</div>
+
+                    <!-- Блок: Альбоми -->
+<div class="mb-5">
+    <h2 class="fw-bold mb-4 border-bottom border-secondary pb-2">Albums</h2>
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
+      {% for album in artist.albums.all %}
+        <div class="col">
+          <div class="card h-100 bg-dark text-white border-0 shadow-sm hover-card">
+            {% if album.cover %}
+              <img src="{{ album.cover.url }}" class="card-img-top rounded-3 p-2 object-fit-cover" style="height: 180px;" alt="{{ album.title }}">
+            {% else %}
+              <img src="{% static 'images/default_cover.png' %}" class="card-img-top rounded-3 p-2 object-fit-cover" style="height: 180px;" alt="{{ album.title }}">
+            {% endif %}
+            <div class="card-body p-2 text-center">
+              <h6 class="card-title text-truncate fw-bold mb-1">{{ album.title }}</h6>
+              <p class="card-text text-muted small">{{ album.release_year }}</p>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <div class="col-12">
+          <p class="text-muted">There is no added albums.</p>
+        </div>
+      {% endfor %}
     </div>
   </div>
-</body>
-</html>
+{% endblock %}
+

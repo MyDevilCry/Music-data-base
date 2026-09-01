@@ -7,8 +7,8 @@ from config import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls',namespace='main')),
-    path('users/', include('users.urls',namespace='users')),
-    path('artists/', include('artists.urls',namespace='artists')),
+    path('user/', include('users.urls',namespace='users')),
+    path('artist/', include('artists.urls',namespace='artists')),
 ]
 
 if settings.DEBUG:

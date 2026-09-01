@@ -1,32 +1,14 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCKTYPE HTML>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Music Data Base</title>
 
-    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
-</head>
 
-<body>
-                <!-- Навігація -->
 
-    <header class='navbar'>
-        <div class="logo">Music Data Base</div>
-        <nav class="nav-links">
-            {% if user %}
-        <a href="{% url 'users:profile' %}" class="btn-profile">{{user.username}}</a>
-        {% else %}
-        <a href="{% url 'users:login' %}" class="btn-login">Login</a>
-        {% endif %}
 
-    </nav>
-</header>
 
-    <main class="main-conteiner">
 
                         <!--Секція 1: Виконавці-->
+{% block content %}
+<main class="main-conteiner">
     <section class="music-section">
         <h2 class="section-title"> Artists</h2>
         <div class="grid-container artists grid">
@@ -45,6 +27,7 @@
             {% empty %}
             <p class="empy-text"> There is no artists </p>
             {% endfor %}
+        </a>
         </div>
     </section>
 
@@ -84,8 +67,7 @@
             </div>
         </section>
     </main>
-</body>
-</html>
+{% endblock %}
 
 
 

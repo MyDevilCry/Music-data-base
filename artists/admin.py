@@ -7,7 +7,8 @@ from artists.models import Artists, Genre, Release
 
 @admin.register(Artists)
 class ArtistsAdmin(admin.ModelAdmin):
-    list_display=('name','artists_type',)
+    list_display=('name','slug','artists_type',)
+    prepopulated_fields = {'slug':('name',)}
 
 
 @admin.register(Genre)

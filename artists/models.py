@@ -1,5 +1,6 @@
 
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.utils.text import slugify
 
 from django.db import models
 
@@ -25,6 +26,12 @@ class Artists(models.Model):
                                             MaxValueValidator(2026)]),
     image=models.ImageField(upload_to='artists',verbose_name="Фото артиста")
 
+    def save(self,*args,**kwargs):
+        if not self.slug:
+            self.slug=slugify(self.name)
+        super().save(*args,**kwargs)
+
+
     def __str__(self):
         return f'{self.name}({self.get_artists_type_display()})'
 
@@ -48,6 +55,8 @@ class Release(models.Model):
 
     def __str__(self):
         return f'{self.name}({self.get_release_type_display()})'
+
+
 
 
 
