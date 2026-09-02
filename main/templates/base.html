@@ -22,7 +22,7 @@
     <!-- Головний контейнер -->
     <main class="main-container">
         {% block content %}
-        <!-- Сюди Django автоматично підставить контент потрібної сторінки -->
+        {% include artists_detail.html %}
         {% endblock %}
     </main>
 </body>

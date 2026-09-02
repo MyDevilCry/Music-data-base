@@ -15,15 +15,14 @@
         </div>
     </div>
 </div>
-
 <div class="col-md-8 col-lg-9">
     <div class="d-flex justify-content-beetween align-items-stars flex-wrap gap-2">
         <h1 class="display-4 fw-bold mb-2">{{artist.name}}</h1>
 
                         <!-- Жанри -->
 <div class="mb-3">
-    {% for genre in artist.genres.all %}
-    <span class="badge bg-secondary me-1 f-6">{{genre.name}}</span>
+    {% for genre in artist.genre.all %}
+    <span class="badge bg-secondary me-1 f-6">{{genre.name}}{% if not forloop.last %},{% endif %}</span>
     {% empty %}
     <span class="text-muted">There is no genres</span>
     {% endfor %}
@@ -31,29 +30,11 @@
     </div>
 
 
-<!-- Кнопка добавлення в бібліотеку -->
 
-<div>
-    {% if user.is_authenticated %}
-    <form action="">
-        {% csrf_token %}
-        {% if is_favorite %}
-        <button type="submit" class="btn-btn-outline-danger btn-lg rounded-pill">
-            <i class="fa-solid fa plus me-2"></i> Add to library
-        </button>
-        {% endif %}
-        </form>
-    {% else %}
-    <a href="{% url 'users:login' %}" class="btn-btn-outline-light btn-lg rounded-pill">
-        <i class="fa-solid fa-plus me-2"></i> Log in to add
-    </a>
-    {% endif %}
-</div>
-    </div>
 
                     <!-- Кнопка добавлення в бібліотеку -->
-<div>
-    {% if user.is_autheticated %}
+    <div>
+    {% if user.is_authenticated %}
     <form action="">
         {% csrf_token %}
         {% if is_favorite %}
@@ -77,8 +58,8 @@
 <div class="mt-3">
     <h5 class="text-uppercase text-muted fs-6">Biography</h5>
     <p class="lh-base text-light opacity-75">
-        {% if artist.bio %}
-            {{ artist.bio|linebreaks }}
+        {% if artist.description %}
+            {{ artist.description|linebreaks }}
         {% else %}
         There is no information about artist.
         {% endif %}
@@ -89,17 +70,17 @@
 <div class="mb-5">
     <h2 class="fw-bold mb-4 border-bottom border-secondary pb-2">Albums</h2>
     <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
-      {% for album in artist.albums.all %}
+      {% for release.name in artist.release_set.all %}
         <div class="col">
           <div class="card h-100 bg-dark text-white border-0 shadow-sm hover-card">
-            {% if album.cover %}
-              <img src="{{ album.cover.url }}" class="card-img-top rounded-3 p-2 object-fit-cover" style="height: 180px;" alt="{{ album.title }}">
+            {% if release.release_image %}
+              <img src="{{ release.release_image.url }}" class="card-img-top rounded-3 p-2 object-fit-cover" style="height: 180px;" alt="{{ album.title }}">
             {% else %}
               <img src="{% static 'images/default_cover.png' %}" class="card-img-top rounded-3 p-2 object-fit-cover" style="height: 180px;" alt="{{ album.title }}">
             {% endif %}
             <div class="card-body p-2 text-center">
-              <h6 class="card-title text-truncate fw-bold mb-1">{{ album.title }}</h6>
-              <p class="card-text text-muted small">{{ album.release_year }}</p>
+              <h6 class="card-title text-truncate fw-bold mb-1">{{ release.image }}</h6>
+              <p class="card-text text-muted small">{{ release_date }}</p>
             </div>
           </div>
         </div>
@@ -110,5 +91,5 @@
       {% endfor %}
     </div>
   </div>
+</div>
 {% endblock %}
-

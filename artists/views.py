@@ -35,6 +35,7 @@ class ArtistsDetailView(DetailView):
     model= Artists
     template_name='artists_detail.html'
     context_object_name = 'artist'
+    extra_context={'title':'artist',}
 
 
 class AddArtistView(LoginRequiredMixin,CreateView):
@@ -42,7 +43,7 @@ class AddArtistView(LoginRequiredMixin,CreateView):
     form_class=AddArtistsForm
     login_url='users:login'
     success_url=reverse_lazy('artists:artists')
-    extra_context={'title':'add an artist'}
+    extra_context={'title':'artist'}
 
 
 
@@ -51,7 +52,7 @@ class CreateGenreView(LoginRequiredMixin,CreateView):#Роблю створен�
     form_class=CreateGenreForm
     login_url = 'users:login'
     success_url=reverse_lazy('artists:genres')
-    extra_context = {'title':'Creation genre'}
+    extra_context = {'title':'genre'}
 
 
 class ReleasesView(ListView):
@@ -66,8 +67,9 @@ class ReleasesView(ListView):
 
 class ReleasesDetailView(DetailView):
     model=Release
-    template_name='artists/release_detail.html'
+    template_name = 'artists/release_detail.html'
     context_object_name = 'releases'
+    extra_context = {'title':'release'}
 
 
 

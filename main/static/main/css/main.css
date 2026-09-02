@@ -81,6 +81,12 @@ body {
     cursor: pointer;
 }
 
+.artists-card:hover {
+    transform: translateY(-4px);
+    transition: background 0.4s, transform 0.4s;
+
+}
+
 .avatar-circle {
     width: 110px;
     height: 110px;
@@ -111,6 +117,10 @@ body {
 /* Грид сітка для Жанрів */
 .genres-grid {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    letter-spacing
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .genre-card {
