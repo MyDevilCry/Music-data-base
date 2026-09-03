@@ -1,8 +1,8 @@
 
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
 from django.utils.text import slugify
 
-from django.db import models
 
 class Genre(models.Model):
 
@@ -13,9 +13,10 @@ class Genre(models.Model):
 
 class Artists(models.Model):
     TYPE_CHOICES=[
-        ('Artist',"Виконавець"),
-        ('Band',"Гурт"),
+        ('Artist','Виконавець'),
+        ('Band','Гурт')
     ]
+
     artists_type=models.CharField(max_length=20,default='artists',verbose_name="Тип (гурт чи виконавець)",choices=TYPE_CHOICES)
     slug = models.SlugField( max_length=250, unique=True, blank=True, null=True,db_index=True)
     name=models.CharField(max_length=100,verbose_name="Назва виконавця")
@@ -26,25 +27,27 @@ class Artists(models.Model):
                                             MaxValueValidator(2026)]),
     image=models.ImageField(upload_to='artists',verbose_name="Фото артиста")
 
+    def __str__(self):
+        return f'{self.name}({self.get_artists_type_display()})'
+
     def save(self,*args,**kwargs):
         if not self.slug:
             self.slug=slugify(self.name)
         super().save(*args,**kwargs)
 
 
-    def __str__(self):
-        return f'{self.name}({self.get_artists_type_display()})'
+
 
 
 
 
 
 class Release(models.Model):
-    TYPE_CHOICES=[
+    TYPE_CHOICES=(
         ('Album',"Повноформатний альбом"),
         ('EP',"Міні-альбом"),
         ('Single',"Сингл"),
-    ]
+    )
     release_type=models.CharField(max_length=50,verbose_name="Тип релізу",choices=TYPE_CHOICES)
     slug = models.SlugField(max_length=250, unique=True, blank=True, null=True, db_index=True)
     artists=models.ForeignKey(to=Artists,on_delete=models.PROTECT,verbose_name='Гурт або виконавець')

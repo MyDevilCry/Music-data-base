@@ -3,9 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import CreateView, DetailView, ListView
 
-from artists.forms import CreateGenreForm, AddArtistsForm
+from artists.forms import AddArtistsForm, GenreCreateForm
 from artists.models import Artists, Release
 
 User=get_user_model()
@@ -15,7 +15,6 @@ class BandOrArtistView(ListView):
     model=Artists
     template_name='artists/artists.html'
     context_object_name='Artists'
-    extra_context={'title':'artists'}
 
 
 @login_required
@@ -35,24 +34,24 @@ class ArtistsDetailView(DetailView):
     model= Artists
     template_name='artists_detail.html'
     context_object_name = 'artist'
-    extra_context={'title':'artist',}
 
 
-class AddArtistView(LoginRequiredMixin,CreateView):
+
+class ArtistAddView(LoginRequiredMixin,CreateView):
     template_name = 'artists/add_artist.html'
     form_class=AddArtistsForm
     login_url='users:login'
     success_url=reverse_lazy('artists:artists')
-    extra_context={'title':'artist'}
 
 
 
-class CreateGenreView(LoginRequiredMixin,CreateView):#Роблю створення жанрів
+
+class GenreCreateView(LoginRequiredMixin,CreateView):
     template_name='artists/create_genre.html'
-    form_class=CreateGenreForm
+    form_class=GenreCreateForm
     login_url = 'users:login'
     success_url=reverse_lazy('artists:genres')
-    extra_context = {'title':'genre'}
+
 
 
 class ReleasesView(ListView):
@@ -69,7 +68,6 @@ class ReleasesDetailView(DetailView):
     model=Release
     template_name = 'artists/release_detail.html'
     context_object_name = 'releases'
-    extra_context = {'title':'release'}
 
 
 

@@ -1,0 +1,12 @@
+[tool.ruff]
+# Вказуємо конкретні папки для ігнорування
+extend-exclude = [
+    ".venv",
+    "artists/migrations",
+]
+
+[tool.mypy]
+plugins = ["mypy_django_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "config.settings"

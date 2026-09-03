@@ -1,16 +1,17 @@
 from django import forms
-from artists.models import Genre, Artists
+
+from artists.models import Artists, Genre
 
 
-class CreateGenreForm(forms.ModelForm):
+class GenreCreateForm(forms.ModelForm):
     class Meta:
         model=Genre
-        fields=['name']
+        fields=('name',)
 
 class AddArtistsForm(forms.ModelForm):
     class Meta:
         model=Artists
-        fields=['name','genre']
+        fields=('name','genre')
 
 
 

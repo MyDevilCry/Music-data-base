@@ -1,14 +1,14 @@
+from typing import ClassVar
+
 from django.contrib import admin
 
 from artists.models import Artists, Genre, Release
 
 
-# Register your models here.
-
 @admin.register(Artists)
 class ArtistsAdmin(admin.ModelAdmin):
     list_display=('name','slug','artists_type',)
-    prepopulated_fields = {'slug':('name',)}
+    prepopulated_fields:ClassVar[dict[str,tuple[str, ...]]]={'slug':('name',)}
 
 
 @admin.register(Genre)
