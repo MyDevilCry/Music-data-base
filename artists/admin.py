@@ -7,14 +7,22 @@ from artists.models import Artists, Genre, Release
 
 @admin.register(Artists)
 class ArtistsAdmin(admin.ModelAdmin):
-    list_display=('name','slug','artists_type',)
-    prepopulated_fields:ClassVar[dict[str,tuple[str, ...]]]={'slug':('name',)}
+    list_display = (
+        "name",
+        "slug",
+        "artists_type",
+    )
+    prepopulated_fields: ClassVar[dict[str, tuple[str, ...]]] = {"slug": ("name",)}
 
 
 @admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
-    list_display=('name',)
+    list_display = ("name",)
+
 
 @admin.register(Release)
 class ReleasesAdmin(admin.ModelAdmin):
-    list_display=('name','release_type',)
+    list_display = (
+        "release_name",
+        "release_type",
+    )

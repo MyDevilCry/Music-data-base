@@ -4,61 +4,55 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.urls import reverse_lazy
 
 User = get_user_model()
+
+
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = User
         fields = ("username", "first_name", "last_name", "email")
 
-    def __init__(self,*args,**kwargs):
-        super().__init__(*args,**kwargs)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-        placeholders={
-            'username': 'Enter your username',
-            'first_name':'Enter your first name',
-            'last_name':'Enter your last name',
-            'email': 'Enter your email',
-            'password1': 'Password',
-            'password2': 'Enter your password again'
-
+        placeholders = {
+            "username": "Enter your username",
+            "first_name": "Enter your first name",
+            "last_name": "Enter your last name",
+            "email": "Enter your email",
+            "password1": "Password",
+            "password2": "Enter your password again",
         }
-        for field_name,placeholder in placeholders.items():
+        for field_name, placeholder in placeholders.items():
             if field_name in self.fields:
-                self.fields[field_name].widget.attrs.update({'placeholder':placeholder})
-
+                self.fields[field_name].widget.attrs.update(
+                    {"placeholder": placeholder}
+                )
 
 
 class UserLoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-        def __init__(self,*args,**kwargs):
-            super().__init__(*args,**kwargs)
+    username = forms.CharField(
+        max_length=20,
+        label="username",
+        widget=forms.TextInput(
+            attrs={"class": "Form-control", "placeholder": "Username"}
+        ),
+    )
 
-        username=forms.CharField(
-            max_length=20,label="username",
-            widget=forms.TextInput(attrs={"class":"Form-control",
-                                          "placeholder":"Username"}))
-
-        password=forms.CharField(
-            label="password",
-            widget=forms.PasswordInput(attrs={"class":"Form-control",
-                                          "placeholder":"Password"}))
-
+    password = forms.CharField(
+        label="password",
+        widget=forms.PasswordInput(
+            attrs={"class": "Form-control", "placeholder": "Password"}
+        ),
+    )
 
 
 class ProfileForm(forms.ModelForm):
-    template_name='users:profile'
-    success_url=reverse_lazy("users:profile")
+    template_name = "users:profile"
+    success_url = reverse_lazy("users:profile")
+
     class Meta:
-        model=User
-        fields=('username','first_name','last_name','email')
-
-
-
-
-
-
-
-
-
-
-
-
+        model = User
+        fields = ("username", "first_name", "last_name", "email")

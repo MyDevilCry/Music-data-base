@@ -3,6 +3,9 @@ from django.db import models
 
 
 class User(AbstractUser):
-    image=models.ImageField(upload_to="users-avatar/",null=True,blank=True,verbose_name="Аватарка користувача")
-
-
+    image = models.ImageField(
+        upload_to="users-avatar/",
+        null=True,
+        blank=True,
+        verbose_name="Аватарка користувача",
+    )

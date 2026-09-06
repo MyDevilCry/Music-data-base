@@ -8,70 +8,60 @@ from django.views.generic import CreateView, DetailView, ListView
 from artists.forms import AddArtistsForm, GenreCreateForm
 from artists.models import Artists, Release
 
-User=get_user_model()
+User = get_user_model()
 
 
 class BandOrArtistView(ListView):
-    model=Artists
-    template_name='artists/artists.html'
-    context_object_name='Artists'
+    model = Artists
+    template_name = "artists/artists.html"
+    context_object_name = "Artists"
 
 
 @login_required
 def add_artists(request):
-    if request.method=='POST':
-        form=AddArtistsForm(request.POST,request.FILES)
+    if request.method == "POST":
+        form = AddArtistsForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('artists/artists.html')
+            return redirect("artists/artists.html")
 
     else:
-        form=AddArtistsForm()
-    return render(request, 'artists/add_artists.html',{'form':form})
+        form = AddArtistsForm()
+    return render(request, "artists/add_artists.html", {"form": form})
 
 
 class ArtistsDetailView(DetailView):
-    model= Artists
-    template_name='artists_detail.html'
-    context_object_name = 'artist'
+    model = Artists
+    template_name = "artists_detail.html"
+    context_object_name = "artist"
 
 
-
-class ArtistAddView(LoginRequiredMixin,CreateView):
-    template_name = 'artists/add_artist.html'
-    form_class=AddArtistsForm
-    login_url='users:login'
-    success_url=reverse_lazy('artists:artists')
-
+class ArtistAddView(LoginRequiredMixin, CreateView):
+    template_name = "artists/add_artist.html"
+    form_class = AddArtistsForm
+    login_url = "users:login"
+    success_url = reverse_lazy("artists:artists")
 
 
-
-class GenreCreateView(LoginRequiredMixin,CreateView):
-    template_name='artists/create_genre.html'
-    form_class=GenreCreateForm
-    login_url = 'users:login'
-    success_url=reverse_lazy('artists:genres')
-
+class GenreCreateView(LoginRequiredMixin, CreateView):
+    template_name = "artists/create_genre.html"
+    form_class = GenreCreateForm
+    login_url = "users:login"
+    success_url = reverse_lazy("artists:genres")
 
 
 class ReleasesView(ListView):
-    model=Release
-    template_name='artists/releases.html'
-    context_object_name = 'Releases'
+    model = Release
+    template_name = "artists/releases.html"
+    context_object_name = "Releases"
 
-    def get_context_data(self,**kwargs):
-        context=super().get_context_data(**kwargs)
-        context['random_release'] = Release.objects.all()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["random_release"] = Release.objects.all()
         return context
 
+
 class ReleasesDetailView(DetailView):
-    model=Release
-    template_name = 'artists/release_detail.html'
-    context_object_name = 'releases'
-
-
-
-
-
-
-
+    model = Release
+    template_name = "artists/release_detail.html"
+    context_object_name = "releases"

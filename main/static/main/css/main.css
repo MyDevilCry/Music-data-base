@@ -5,6 +5,11 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.logo {
+    text-decoration: none;
+    color: inherit; /* Зберігає початковий колір тексту */
+}
+
 body {
     background-color: #121212;
     color: #ffffff;

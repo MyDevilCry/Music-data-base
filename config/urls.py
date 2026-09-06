@@ -5,10 +5,10 @@ from django.urls import include, path
 from config import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('main.urls',namespace='main')),
-    path('user/', include('users.urls',namespace='users')),
-    path('artist/', include('artists.urls',namespace='artists')),
+    path("admin/", admin.site.urls),
+    path("", include("main.urls", namespace="main")),
+    path("user/", include("users.urls", namespace="users")),
+    path("artist/", include("artists.urls", namespace="artists")),
 ]
 
 if settings.DEBUG:

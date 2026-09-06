@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d7285208-19ea-46a3-9fa4-b673ba485115" name="Изменения" comment="Коміт : додав зміни у верстку">
-      <change afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+    <list default="true" id="d7285208-19ea-46a3-9fa4-b673ba485115" name="Изменения" comment="Виправив назви у в'юшках, виправив помилки через рафф">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/artists/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/artists/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artists/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/artists/apps.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/artists/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/artists/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/artists/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/artists/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artists/static/artists/css/artists_detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/artists/static/artists/css/artists_detail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artists/templates/artists_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/artists/templates/artists_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/artists/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/artists/tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/artists/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/artists/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/artists/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/artists/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/asgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/asgi.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/wsgi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/static/main/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/main/static/main/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/apps.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/tests.py" afterDir="false" />
@@ -143,7 +152,15 @@
       <option name="project" value="LOCAL" />
       <updated>1788369047509</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Виправив назви у в'юшках, виправив помилки через рафф">
+      <option name="closed" value="true" />
+      <created>1788454368349</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1788454368350</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -164,6 +181,7 @@
     <MESSAGE value="Коміт : Додав інформацію на головну сторінку + переробив юрлки" />
     <MESSAGE value="Коміт : зробив верстку з сторінкою артистів(потім буду дороблювати нормально)" />
     <MESSAGE value="Коміт : додав зміни у верстку" />
-    <option name="LAST_COMMIT_MESSAGE" value="Коміт : додав зміни у верстку" />
+    <MESSAGE value="Виправив назви у в'юшках, виправив помилки через рафф" />
+    <option name="LAST_COMMIT_MESSAGE" value="Виправив назви у в'юшках, виправив помилки через рафф" />
   </component>
 </project>

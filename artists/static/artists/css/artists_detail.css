@@ -5,6 +5,34 @@
     object-fit: cover;
 }
 
+.artist-releases-scroll {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 16px;
+    padding-bottom: 12px;
+}
+
+.album-cd-it {
+    flex: 0 0 180px;         /* Фіксована ширина 180px, не стискається */
+    width: 180px;
+    min-width: 180px;
+}
+
+.album-cd-it .card {
+    width: 100%;
+    height: 100%;
+}
+
+album-cd-it img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+
+
 /* Ефект підняття картки альбому при наведенні */
 .hover-card {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
