@@ -63,15 +63,9 @@ class Release(models.Model):
     genres = models.ManyToManyField(
         to=Genre, max_length=50, blank=True, verbose_name="Жанри релізу"
     )
-    release_name = models.CharField(
-        max_length=50, verbose_name="Назва релізу"
-    )
-    release_date = models.DateField(
-        verbose_name="Дата видання релізу"
-    )
-    release_description = models.TextField(
-        max_length=500, verbose_name="Опис релізу"
-    )
+    release_name = models.CharField(max_length=50, verbose_name="Назва релізу")
+    release_date = models.DateField(verbose_name="Дата видання релізу")
+    release_description = models.TextField(max_length=500, verbose_name="Опис релізу")
     release_image = models.ImageField(
         upload_to="covers", verbose_name="Обкладинка альбому"
     )
