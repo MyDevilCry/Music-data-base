@@ -5,6 +5,94 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+
+
+
+/* --- СТИЛІЗАЦІЯ ШАПКИ (NAVBAR) --- */
+
+header.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 32px;
+    background-color: #121212;
+    border-bottom: 1px solid #282828;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Логотип */
+header.navbar .logo {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    transition: color 0.2s ease;
+}
+
+header.navbar .logo:hover {
+    color: #0d6efd;
+}
+
+/* Форма пошуку в шапці */
+header.navbar .search-form {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background-color: #1e1e1e;
+    border: 1px solid #333333;
+    border-radius: 50px;
+    padding: 3px 4px 3px 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+header.navbar .search-form:focus-within {
+    border-color: #0d6efd;
+    box-shadow: 0 0 8px rgba(13, 110, 253, 0.4);
+}
+
+header.navbar .search-form input[type="search"] {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 0.88rem;
+    width: 220px;
+}
+
+header.navbar .search-form input[type="search"]::placeholder {
+    color: #777777;
+}
+
+/* Кнопка Search */
+header.navbar .search-form input[type="submit"],
+header.navbar .search-form button {
+    background-color: #0d6efd;
+    border: none;
+    color: #ffffff;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+header.navbar .search-form input[type="submit"]:hover,
+header.navbar .search-form button:hover {
+    background-color: #0b5ed7;
+}
+
+/* Навігація / Кнопка профілю */
+header.navbar .nav-links,
+header.navbar nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .logo {
     text-decoration: none;
     color: inherit; /* Зберігає початковий колір тексту */

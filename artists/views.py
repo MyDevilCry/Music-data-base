@@ -33,7 +33,13 @@ def add_artists(request):
 class ArtistsDetailView(DetailView):
     model = Artists
     template_name = "artists_detail.html"
-    context_object_name = "artist"
+    context_object_name = 'artist'
+
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        artists = self.get_object()
+        context['release_artist_detail']=Release.objects.filter(artists=artists).order_by('release_date')
+        return context
 
 
 class ArtistAddView(LoginRequiredMixin, CreateView):
@@ -61,7 +67,11 @@ class ReleasesView(ListView):
         return context
 
 
-class ReleasesDetailView(DetailView):
+class ReleasesDetailView(ListView):
     model = Release
     template_name = "artists/release_detail.html"
     context_object_name = "releases"
+
+
+
+

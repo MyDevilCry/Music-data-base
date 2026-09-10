@@ -1,0 +1,162 @@
+/* --- СТИЛІЗАЦІЯ БЛОКУ ЗАГОЛОВКА ПОШУКУ --- */
+
+/* Контейнер заголовка з м'якою лінією знизу */
+.search-results-wrapper > div.border-bottom {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding-bottom: 1.5rem !important;
+    margin-bottom: 2rem !important;
+}
+
+/* Головний заголовок h1 */
+.search-results-wrapper h1.fw-bold {
+    font-size: 2.2rem;
+    font-weight: 800 !important;
+    letter-spacing: -0.5px;
+    color: #ffffff !important;
+    line-height: 1.2;
+}
+
+/* Виділений пошуковий запит (span.text-primary) з градієнтом */
+.search-results-wrapper h1 span.text-primary {
+    background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+    padding: 0 4px;
+}
+
+/* Підзаголовок (текст-опис) */
+.search-results-wrapper p.text-muted {
+    color: #a0a0a0 !important;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-top: 6px;
+}
+
+/* --- Заголовки секцій --- */
+.section-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border-left: 4px solid #0d6efd; /* Синій акцент Spotify/Apple Music стилю */
+    padding-left: 12px;
+    margin-bottom: 20px;
+}
+
+/* --- СЕКЦІЯ: АРТИСТИ --- */
+.artists-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.artist-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 130px;
+    text-align: center;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.artist-item:hover {
+    transform: translateY(-4px);
+    opacity: 0.9;
+}
+
+.artist-avatar-wrapper {
+    width: 120px !important;
+    height: 120px !important;
+    border-radius: 50% !important;
+    overflow: hidden;
+    background-color: #212529;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.artist-avatar-wrapper img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+.artist-name {
+    margin-top: 8px;
+    font-size: 0.95rem;
+    color: #ffffff;
+    max-width: 100%;
+}
+
+
+/* --- СЕКЦІЯ: ЖАНРИ --- */
+.genres-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.genre-chip {
+    font-size: 0.85rem;
+    border-radius: 50px !important;
+    transition: background-color 0.2s ease;
+}
+
+
+/* --- СЕКЦІЯ: РЕЛІЗИ / АЛЬБОМИ --- */
+.releases-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.release-card {
+    width: 170px !important;
+    background-color: #181818 !important;
+    border: 1px solid #282828 !important;
+    border-radius: 8px !important;
+    padding: 12px !important;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.release-card:hover {
+    background-color: #282828 !important;
+    transform: translateY(-4px);
+}
+
+.release-cover-wrapper {
+    width: 100%;
+    height: 146px !important;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #212529;
+    margin-bottom: 10px;
+}
+
+.release-cover-wrapper img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+.release-card h6 {
+    font-size: 0.9rem;
+    margin-bottom: 2px;
+    color: #ffffff;
+}
+
+.card-date {
+    font-size: 12px;
+    color: #a0a0a0;
+    margin-top: 2px;
+
+}
+
+.card-subtitle {
+    font-size: 12px !important;
+    color: #a0a0a0 !important;
+    margin-top: 2px !important;
+}
+
+.release-card p {
+    font-size: 0.8rem;
+    color: #b3b3b3 !important;
+}

@@ -6,6 +6,8 @@
     <title>Music DataBase</title>
     <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
     <link rel="stylesheet" href="{% static 'artists/css/artists_detail.css'%}">
+    {% block extra_head %}
+    {% endblock %}
 </head>
 
 <body>
@@ -32,7 +34,7 @@
     <!-- Головний контейнер -->
     <main class="main-container">
         {% block content %}
-        {% include artists_detail.html %}
+        {% include 'artists_detail.html' %}
         {% endblock %}
     </main>
 </body>

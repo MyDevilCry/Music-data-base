@@ -71,7 +71,7 @@
 <div class="mb-5">
     <h2 class="fw-bold mb-4 border-bottom border-secondary pb-2 ">Albums</h2>
     <div class="artist-releases-scroll">
-      {% for release in artist.release_set.all %}
+      {% for release in release_artist_detail %}
         <div class="album-cd-it">
           <div class="card h-100 bg-dark text-white border-0 shadow-sm hover-card">
             {% if release.release_image %}
