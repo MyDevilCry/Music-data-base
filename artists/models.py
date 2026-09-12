@@ -45,6 +45,23 @@ class Artists(models.Model):
         super().save(*args, **kwargs)
 
 
+class Track(models.Model):
+    release = models.ForeignKey(
+        "Release", on_delete=models.CASCADE, related_name="tracks"
+    )
+    title = models.CharField(max_length=255)
+    position = models.PositiveIntegerField(help_text="Номере трека в альбомі")
+    duration = models.CharField(
+        max_length=10, blank=True, null=True, help_text="e.g. 03:45"
+    )
+
+    class Meta:
+        ordering = ["position"]
+
+    def __str__(self):
+        return f"{self.position}. {self.title}"
+
+
 class Release(models.Model):
     TYPE_CHOICES = (
         ("Album", "Повноформатний альбом"),

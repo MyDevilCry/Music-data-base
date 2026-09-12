@@ -1,10 +1,11 @@
-from artists.models import Artists
 from django.contrib.postgres.search import (
-    SearchVector,
+    SearchHeadline,
     SearchQuery,
     SearchRank,
-    SearchHeadline,
+    SearchVector,
 )
+
+from artists.models import Artists
 
 
 def q_search(query):

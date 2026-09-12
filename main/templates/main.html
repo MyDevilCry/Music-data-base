@@ -50,6 +50,7 @@
             <h2 class="section-title"> Recommended albums </h2>
             <div class="horizontal-scroll releases-scroll">
                 {% for release in random_release %}
+                <a href="{% url 'main:releases_detail' release.id  %}" class="album-card-link">
                 <div class="album-card">
                  <div class="cover-wrapper">
                      {% if release.release_image %}
@@ -62,10 +63,12 @@
                     <p class="card-subtitle">{{release.artists.name}} </p>
                     <p class="card-text text-muted small card-subtitle">{{release.release_date }}</p>
                 </div>
+
                 {% empty %}
                 <p class="empty-text"> There is no releases </p>
                 {% endfor %}
             </div>
+                </a>
         </section>
     </main>
 {% endblock %}

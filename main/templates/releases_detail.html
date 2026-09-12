@@ -1,0 +1,30 @@
+<div style="background: red; color: white; padding: 10px;">
+  DEBUG release: "{{ release }}" <br>
+  DEBUG description: "{{ releases_detail }}"
+</div>
+
+<!-- Опис альбому -->
+{% if releases_detail %}
+  <div class="album-description my-4">
+    <h5>About Album</h5>
+    <p>{{ release_description }}</p>
+  </div>
+{% endif %}
+
+<!-- Трекліст -->
+<div class="tracklist-section mt-4">
+  <h5>Tracklist</h5>
+  <ul class="list-group list-group-flush bg-dark text-white">
+    {% for track in release.tracks.all %}
+      <li class="list-group-item bg-transparent text-white d-flex justify-content-between align-items-center">
+        <div>
+          <span class="text-muted me-3">{{ track.position }}.</span>
+          <span>{{ track.title }}</span>
+        </div>
+        <span class="text-muted small">{{ track.duration }}</span>
+      </li>
+    {% empty %}
+      <li class="list-group-item bg-transparent text-muted">No tracks available.</li>
+    {% endfor %}
+  </ul>
+</div>
