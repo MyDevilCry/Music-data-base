@@ -6,9 +6,7 @@ app_name = "artists"
 
 urlpatterns = [
     path("", views.ListView.as_view(), name="main"),
-    path("artists", views.BandOrArtistView.as_view(), name="artists"),
     path("releases", views.ReleasesView.as_view(), name="releases"),
-    path("add_artists/", views.ArtistAddView.as_view(), name="add_artists"),
-    path("creation_genre/", views.GenreCreateView.as_view(), name="creation_genre"),
+    path("release/<slug:slug>/",views.ReleasesDetailView.as_view(), name="releases_detail"),
     path("<slug:slug>/", views.ArtistsDetailView.as_view(), name="artists_detail"),
 ]

@@ -1,30 +1,57 @@
-<div style="background: red; color: white; padding: 10px;">
-  DEBUG release: "{{ release }}" <br>
-  DEBUG description: "{{ releases_detail }}"
-</div>
+{% extends 'base.html' %}
 
-<!-- Опис альбому -->
-{% if releases_detail %}
-  <div class="album-description my-4">
-    <h5>About Album</h5>
-    <p>{{ release_description }}</p>
-  </div>
-{% endif %}
+{% block content %}
+<div class="release-detail-container">
 
-<!-- Трекліст -->
-<div class="tracklist-section mt-4">
-  <h5>Tracklist</h5>
-  <ul class="list-group list-group-flush bg-dark text-white">
-    {% for track in release.tracks.all %}
-      <li class="list-group-item bg-transparent text-white d-flex justify-content-between align-items-center">
-        <div>
-          <span class="text-muted me-3">{{ track.position }}.</span>
-          <span>{{ track.title }}</span>
+    <!-- Шапка релізу -->
+    <div class="release-header">
+        <div class="release-cover-wrapper">
+            {% if release.release_image %}
+                <img src="{{ release.release_image.url }}" alt="{{ release.release_name }}">
+            {% else %}
+                <div class="cover-placeholder">🎵</div>
+            {% endif %}
         </div>
-        <span class="text-muted small">{{ track.duration }}</span>
-      </li>
-    {% empty %}
-      <li class="list-group-item bg-transparent text-muted">No tracks available.</li>
-    {% endfor %}
-  </ul>
+        <div class="release-info">
+            <h1 class="release-title">{{ release.release_name }}</h1>
+            <div class="release-artist">{{ release.artists.name }}</div>
+            <div class="release-meta">
+                <span>{{ release.get_release_type_display }}</span>
+                {% if release.release_date %}
+                    <span>{{ release.release_date|date:"Y" }}</span>
+                {% endif %}
+              {% for genre in release.genres.all %}
+              <span>{{ genre.name }}</span>
+              {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Опис альбому -->
+    {% if release.release_description %}
+        <div class="album-description">
+            <h5>About Album</h5>
+            <p>{{ release.release_description }}</p>
+        </div>
+    {% endif %}
+
+    <!-- Трекліст -->
+    <div class="tracklist-section">
+        <h5>Tracklist</h5>
+        <ul class="tracklist-group">
+            {% for track in release.tracks.all %}
+                <li class="track-item">
+                    <div class="track-left">
+                        <span class="track-number">{{ track.position }}</span>
+                        <span class="track-title">{{ track.title }}</span>
+                    </div>
+                    <span class="track-duration">{{ track.duration }}</span>
+                </li>
+            {% empty %}
+                <li class="track-item text-muted">No tracks available.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
 </div>
+{% endblock %}

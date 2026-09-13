@@ -20,8 +20,8 @@ def fetch_and_save_album_data(release_id):
     browse_id = search_results[0]['browseId']
     album_data = yt.get_album(browse_id)
 
-    if album_data.get('description') and not release.description:
-        release.description = album_data['description']
+    if album_data.get('description') and not release.release_description:
+        release.release_description = album_data['description']
         release.save()
 
     tracks = album_data.get('tracks',[])

@@ -1,33 +1,10 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect, render
-from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import DetailView, ListView
 
-from artists.forms import AddArtistsForm, GenreCreateForm
 from artists.models import Artists, Release
+from main.services import fetch_and_save_album_data
 
 User = get_user_model()
-
-
-class BandOrArtistView(ListView):
-    model = Artists
-    template_name = "artists/artists.html"
-    context_object_name = "Artists"
-
-
-@login_required
-def add_artists(request):
-    if request.method == "POST":
-        form = AddArtistsForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect("artists/artists.html")
-
-    else:
-        form = AddArtistsForm()
-    return render(request, "artists/add_artists.html", {"form": form})
 
 
 class ArtistsDetailView(DetailView):
@@ -44,20 +21,6 @@ class ArtistsDetailView(DetailView):
         return context
 
 
-class ArtistAddView(LoginRequiredMixin, CreateView):
-    template_name = "artists/add_artist.html"
-    form_class = AddArtistsForm
-    login_url = "users:login"
-    success_url = reverse_lazy("artists:artists")
-
-
-class GenreCreateView(LoginRequiredMixin, CreateView):
-    template_name = "artists/create_genre.html"
-    form_class = GenreCreateForm
-    login_url = "users:login"
-    success_url = reverse_lazy("artists:genres")
-
-
 class ReleasesView(ListView):
     model = Release
     template_name = "artists/releases.html"
@@ -69,7 +32,16 @@ class ReleasesView(ListView):
         return context
 
 
-class ReleasesDetailView(ListView):
+class ReleasesDetailView(DetailView):
     model = Release
-    template_name = "artists/release_detail.html"
-    context_object_name = "releases"
+    template_name = "releases_detail.html"
+    context_object_name = "release"
+
+    def get_object(self, queryset = None):
+        obj = super().get_object(queryset)
+
+        if not obj.tracks.exists():
+            fetch_and_save_album_data(obj.id)
+            obj.refresh_from_db()
+
+        return obj
