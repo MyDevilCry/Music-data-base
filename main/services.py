@@ -1,3 +1,4 @@
+import requests
 from ytmusicapi import YTMusic
 from artists.models import Release, Track
 
@@ -36,5 +37,35 @@ def fetch_and_save_album_data(release_id):
             }
         )
     return True
+
+
+def get_wikipedia_album_summary(album_name, artist_name, lang='en'):
+    user_agent = "MusicDataBaseApp/1.0 (contact@example.com)"
+    headers = {'User-Agent':user_agent}
+    query= f"{album_name} {artist_name} album"
+    search_url = f"https://{lang}.wikipedia.org/w/api.php"
+    search_params = {
+        "action": "query",
+        "list": "search",
+        "srsearch": query,
+        "format": "json"
+    }
+    try:
+        response = requests.get(search_url, params=search_params, headers=headers).json()
+        results = response.get('query',{}).get('search',[])
+
+        if results:
+            page_title = results[0]['title']
+            summary_url = f"https://{lang}.wikipedia.org/api/rest_v1/page/summary/{requests.utils.quote(page_title)}"
+            summary_res = requests.get(summary_url, headers=headers).json()
+
+            return summary_res.get('extract', '')
+
+    except Exception as e:
+        print(f" Error : {e}")
+
+    return ""
+
+
 
 

@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.views.generic import DetailView, ListView
 
 from artists.models import Artists, Release
-from main.services import fetch_and_save_album_data
+from main.services import fetch_and_save_album_data, get_wikipedia_album_summary
 
 User = get_user_model()
 
@@ -44,4 +44,13 @@ class ReleasesDetailView(DetailView):
             fetch_and_save_album_data(obj.id)
             obj.refresh_from_db()
 
+        if not obj.release_description:
+            artist_name = obj.artists.name if hasattr(obj, 'artists') and obj.artists else ""
+            wiki_summary = get_wikipedia_album_summary(obj.release_name,artist_name)
+
+            if wiki_summary:
+                obj.release_description = wiki_summary
+                obj.save()
+
         return obj
+

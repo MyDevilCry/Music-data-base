@@ -5,19 +5,47 @@
     object-fit: cover;
 }
 
-.artist-releases-scroll {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 16px;
-    padding-bottom: 12px;
+
+.biography-box {
+    background-color: #16181c; /* Темний фон картки */
+    border-left: 4px solid #1ed760; /* Зелена акцентна смуга зліва */
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-.album-cd-it {
-    flex: 0 0 180px;         /* Фіксована ширина 180px, не стискається */
-    width: 180px;
-    min-width: 180px;
+.biography-title {
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.biography-text {
+    color: #d1d5db;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+.artist-releases-scroll {
+    overflow: visible !important;
+    max-height: none !important;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
+}
+
+
+.album-card-link {
+
+
+}
+
+.album-card-link:hover {
+    background-color: #2a2a2a;
 }
 
 .album-cd-it .card {
@@ -25,11 +53,14 @@
     height: 100%;
 }
 
+
 album-cd-it img {
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
 }
+
+
 
 
 

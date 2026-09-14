@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d7285208-19ea-46a3-9fa4-b673ba485115" name="Изменения" comment="Додав базу даних ютуб м'юзік(налаштовую)">
-      <change afterPath="$PROJECT_DIR$/main/static/main/css/releases_detail.css" afterDir="false" />
+    <list default="true" id="d7285208-19ea-46a3-9fa4-b673ba485115" name="Изменения" comment="Налаштував треклісти через API, + вдосконалив верстку релізів">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/artists/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/artists/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artists/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/artists/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artists/static/artists/css/artists_detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/artists/static/artists/css/artists_detail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artists/templates/artists_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/artists/templates/artists_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/artists/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/artists/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/services.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/static/main/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/main/static/main/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/templates/releases_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/releases_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +175,15 @@
       <option name="project" value="LOCAL" />
       <updated>1789230033557</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Налаштував треклісти через API, + вдосконалив верстку релізів">
+      <option name="closed" value="true" />
+      <created>1789311639365</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1789311639365</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -201,6 +209,7 @@
     <MESSAGE value="Налаштовую пошук" />
     <MESSAGE value="Налаштував пошук + сортування від старих до нових альбомів" />
     <MESSAGE value="Додав базу даних ютуб м'юзік(налаштовую)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Додав базу даних ютуб м'юзік(налаштовую)" />
+    <MESSAGE value="Налаштував треклісти через API, + вдосконалив верстку релізів" />
+    <option name="LAST_COMMIT_MESSAGE" value="Налаштував треклісти через API, + вдосконалив верстку релізів" />
   </component>
 </project>
