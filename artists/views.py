@@ -1,4 +1,6 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, ListView
 
 from artists.models import Artists, Release
@@ -12,6 +14,7 @@ class ArtistsDetailView(DetailView):
     template_name = "artists_detail.html"
     context_object_name = "artist"
 
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         artists = self.get_object()
@@ -19,6 +22,19 @@ class ArtistsDetailView(DetailView):
             artists=artists
         ).order_by("release_date")
         return context
+
+@login_required
+
+def toggle_favorite_artists(request,slug):
+    artist=get_object_or_404(Artists,slug=slug)
+    if artist in request.user.favorite_artists.all():
+        request.user.favorite_artists.remove(artist)
+    else:
+        request.user.favorite_artists.add(artist)
+
+    return redirect('artists:artists_detail',slug=slug)
+
+
 
 
 class ReleasesView(ListView):
@@ -53,4 +69,14 @@ class ReleasesDetailView(DetailView):
                 obj.save()
 
         return obj
+
+@login_required
+def toggle_favorite_releases(request, slug):
+    release = get_object_or_404(Release, slug=slug)
+    if release in request.user.favorite_releases.all():
+        request.user.favorite_releases.remove(release)
+    else:
+        request.user.favorite_releases.add(release)
+
+    return redirect('artists:releases_detail', slug=slug)
 

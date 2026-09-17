@@ -1,75 +1,115 @@
+{% extends 'main.html' %}
 {% load static %}
-<!DOCKTYPE HTML>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Profile</title>
 
-    <link rel="stylesheet" href="{% static 'users/css/profile.css' %}">
-</head>
+{% block content %}
+<div class="container py-4 text-white">
+    <div class="row g-4">
 
- <body>
-    <div class="profile-card">
-            <!-- Шапка профілю і аватарка -->
-        <div class="profile-header">
-            <div class="avatar-wrapper">
+        <!-- ЛІВА КОЛОНКА: Картка профілю користувача -->
+        <div class="col-lg-4">
+            <div class="card bg-dark text-white border-0 shadow-lg rounded-4 p-4 text-center position-sticky" style="top: 90px; background-color: #16181c !important;">
 
-                <div class="avatar-placeholder">
-                    {% if user.image %}
-                    <img src="{{ users-avatar.url }}">
-
-                    <span> {{user.username|slice:'1'|upper}}</span>
+                <!-- Аватарка -->
+                <div class="position-relative d-inline-block mx-auto mb-3">
+                    {% if user.profile.avatar %}
+                        <img src="{{ user.profile.avatar.url }}" alt="{{ user.username }}" class="rounded-circle object-fit-cover shadow-lg border border-secondary border-2" width="140" height="140">
+                    {% else %}
+                        <img src="{% static 'images/default_avatar.png' %}" alt="{{ user.username }}" class="rounded-circle object-fit-cover shadow-lg border border-secondary border-2" width="140" height="140">
+                    {% endif %}
                 </div>
-            </div>
 
+                <!-- Юзернейм та Пошта -->
+                <h3 class="fw-bold mb-1">{{ user.username }}</h3>
+                <p class="text-muted small mb-3"><i class="fa-regular fa-envelope me-1"></i>{{ user.email }}</p>
 
-
-                    <!--Форма редагування профілю-->
-
-            <form method="post" enctype="multipart/form-data" class="profile-form">
-                {% csrf_token %}
-
-                        <!--Вивід помилок форми-->
-                {% if form.non_field_errors %}
-                <div class='form-errors'>
-                    {{form.non_field_errors%}
+                <div class="d-flex justify-content-center gap-2 mb-4">
+                    <span class="badge bg-secondary opacity-75 rounded-pill px-3 py-2">Music Enthusiast</span>
                 </div>
-                {%endif%}
 
+                <!-- Кнопки управління (Редагувати та Вихід) -->
+                <div class="d-grid gap-2">
+                    <a href="#" class="btn btn-outline-light rounded-pill font-weight-bold">
+                        <i class="fa-solid fa-pen-to-square me-2"></i>Edit Profile
+                    </a>
 
-                        <!-- Вивід помилок -->
-                {% for field in form %}
-            <div class="form-group">
-                <label for='{{field.id_for_label}}'>{{field.label}}</label>
-                {{field}}
-                {% if field_errors %}
+                    <form action="{% url 'users:logout' %}" method="post" class="d-grid">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger rounded-pill fw-bold">
+                            <i class="fa-solid fa-right-from-bracket me-2"></i>Log Out
+                        </button>
+                    </form>
+                </div>
 
-            <div class="field-error">
-                {{field.errors.0}}
             </div>
-            </div>
-                {%endif%}
-                {%endfor%}
-            <button type="submit" class="btn-save">Save</button>
-            </form>
-                        <!--Кнопка виходу-->
-        <div class="profile-footer">
-            <form action="{% url 'users:logout' %}" method="post">
-                {% csrf_token %}
-                <button type="submit" class="btn-logout">Logout</button>
-            </form>
         </div>
+
+        <!-- ПРАВА КОЛОНКА: Улюблені артисти та Альбоми -->
+        <div class="col-lg-8">
+
+            <!-- Секція: Улюблені артисти -->
+            <div class="mb-5">
+                <div class="d-flex align-items-center justify-content-between mb-3 border-bottom border-secondary pb-2">
+                    <h4 class="fw-bold mb-0"><i class="fa-solid fa-user-group me-2 text-success"></i>Favorite Artists</h4>
+                </div>
+
+                <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3">
+                    {% for artist in user.favorite_artists.all %}
+                        <div class="col">
+                            <a href="{% url 'artists:artists_detail' artist.slug %}" class="text-decoration-none">
+                                <div class="card h-100 bg-dark text-white border-0 shadow-sm rounded-4 p-3 text-center hover-card" style="background-color: #18181c !important;">
+                                    {% if artist.image %}
+                                        <img src="{{ artist.image.url }}" class="rounded-circle object-fit-cover mx-auto mb-2 shadow" style="width: 90px; height: 90px;" alt="{{ artist.name }}">
+                                    {% else %}
+                                        <img src="{% static 'images/default_artist.png' %}" class="rounded-circle object-fit-cover mx-auto mb-2 shadow" style="width: 90px; height: 90px;" alt="{{ artist.name }}">
+                                    {% endif %}
+                                    <h6 class="card-title text-truncate fw-bold mb-0 text-white">{{ artist.name }}</h6>
+                                </div>
+                            </a>
+                        </div>
+                    {% empty %}
+                        <div class="col-12">
+                            <div class="p-4 rounded-4 text-center bg-dark text-muted" style="background-color: #18181c !important;">
+                                No favorite artists added yet.
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Секція: Улюблені альбоми -->
+            <div>
+                <div class="d-flex align-items-center justify-content-between mb-3 border-bottom border-secondary pb-2">
+                    <h4 class="fw-bold mb-0"><i class="fa-solid fa-compact-disc me-2 text-success"></i>Favorite Albums</h4>
+                </div>
+
+                <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3">
+                    {% for releases in user.favorite_releases.all %}
+                        <div class="col">
+                            <a href="{% url 'artists:releases_detail' releases.slug %}" class="album-card-link">
+                                <div class="album-cd-it">
+                                    {% if releases.release_image %}
+                                        <img src="{{ releases.release_image.url }}" class="card-img-top rounded-3 object-fit-cover" style="height: 150px;" alt="{{ album.release_name }}">
+                                    {% else %}
+                                        <img src="{% static 'images/default_cover.png' %}" class="card-img-top rounded-3 object-fit-cover" style="height: 150px;" alt="{{ album.release_name }}">
+                                    {% endif %}
+                                    <div class="card-body p-2 text-center">
+                                        <h6 class="card-title text-truncate fw-bold mb-1">{{ releases.release_name }}</h6>
+                                        <p class="card-text text-muted small mb-0 text-truncate">{{ releases.artists.name }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% empty %}
+                        <div class="col-12">
+                            <div class="p-4 rounded-4 text-center bg-dark text-muted" style="background-color: #18181c !important;">
+                                No favorite albums added yet.
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
         </div>
     </div>
- </body>
-</html>
-
-
-
-
-
-
-
-
-
+</div>
+{% endblock %}

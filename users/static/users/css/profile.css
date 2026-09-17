@@ -1,155 +1,77 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* ==========================================
+   Профіль користувача (Profile Styles)
+   ========================================== */
+
+/* Фіксована ліва картка (Сайдбар профілю) */
+.position-sticky {
+    top: 90px;
+    z-index: 10;
 }
 
-body {
-    background-color: #121212;
-    color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-}
-
-/* Картка профілю */
-.profile-card {
-    background-color: #1e1e1e;
-    padding: 40px;
-    border-radius: 12px;
+/* Аватарка профілю */
+.position-relative img {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-    width: 100%;
-    max-width: 440px;
+    transition: transform 0.3s ease;
 }
 
-/* Шапка з аватаром */
-.profile-header {
-    text-align: center;
-    margin-bottom: 28px;
+.position-relative img:hover {
+    transform: scale(1.03);
 }
 
-.avatar-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 14px;
+/* Картки улюблених артистів */
+.hover-card {
+    background-color: #18181c !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.25s ease;
 }
 
-.avatar-placeholder {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #2563eb, #3b82f6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 32px;
-    font-weight: 700;
-    color: #ffffff;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+.hover-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6) !important;
 }
 
-.profile-header h2 {
-    font-size: 24px;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 4px;
+/* Аватарки артистів у картці */
+.hover-card img {
+    display : row;
+    transition: transform 0.25s ease;
 }
 
-.user-email {
-    font-size: 14px;
-    color: #a0a0a0;
+.hover-card:hover img {
+    transform: scale(1.05);
 }
 
-/* Поля форми */
-.form-group {
-    margin-bottom: 18px;
+/* Кнопки управління в профілі */
+.btn-outline-light {
+    border-color: rgba(255, 255, 255, 0.2);
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
-.form-group label {
-    display: block;
-    font-size: 13px;
-    color: #cccccc;
-    margin-bottom: 6px;
-    font-weight: 500;
+.btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px);
 }
 
-.form-group input {
-    width: 100%;
-    padding: 12px 14px;
-    background-color: #2a2a2a;
-    border: 1px solid #3d3d3d;
-    border-radius: 6px;
-    color: #ffffff;
-    font-size: 14px;
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.form-group input:focus {
-    outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-}
-
-/* Помилки */
-.form-errors {
-    background-color: rgba(239, 68, 68, 0.1);
-    border: 1px solid #ef4444;
-    color: #ef4444;
-    padding: 10px 12px;
-    border-radius: 6px;
-    font-size: 13px;
-    margin-bottom: 18px;
-}
-
-.field-error {
-    color: #ef4444;
-    font-size: 12px;
-    margin-top: 5px;
-}
-
-/* Кнопка збереження */
-.btn-save {
-    width: 100%;
-    padding: 12px;
-    background-color: #2563eb;
-    color: #ffffff;
+.btn-danger {
+    background-color: #dc3545;
     border: none;
-    border-radius: 6px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    margin-top: 10px;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.btn-save:hover {
-    background-color: #1d4ed8;
+.btn-danger:hover {
+    background-color: #bb2d3b;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
 }
 
-/* Розділювач і кнопка виходу */
-.profile-footer {
-    margin-top: 24px;
-    padding-top: 20px;
-    border-top: 1px solid #2d2d2d;
-}
-
-.btn-logout {
-    width: 100%;
-    padding: 11px;
-    background-color: transparent;
-    color: #ef4444;
-    border: 1px solid #ef4444;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-.btn-logout:hover {
-    background-color: #ef4444;
-    color: #ffffff;
+/* Адаптивність для мобільних пристроїв */
+@media (max-width: 991.98px) {
+    .position-sticky {
+        position: relative !important;
+        top: 0 !important;
+        margin-bottom: 2rem;
+    }
 }

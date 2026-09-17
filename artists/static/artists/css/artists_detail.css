@@ -38,55 +38,58 @@
     gap: 1.5rem;
 }
 
-
+/* Посилання-обгортка для всієї картки альбому */
 .album-card-link {
-
-
+    display: block;
+    text-decoration: none !important;
+    border-radius: 12px;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Ефект підняття та акуратної м'якої тіні навколо всієї картки */
 .album-card-link:hover {
-    background-color: #2a2a2a;
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.03);
 }
 
-.album-cd-it .card {
+/* Стилі для контейнера обкладинки */
+.album-cd-it {
     width: 100%;
-    height: 100%;
+    border-radius: 8px;
+    overflow: hidden; /* Закруглює кути саме для картинки */
+    background-color: #1e1e1e;
 }
 
+/* Картинка обкладинки */
+.album-cd-it img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important; /* Тримає квадратну форму 1:1 */
+    object-fit: cover !important;
+}
 
-album-cd-it img {
+/* Заглушка, якщо немає картинки */
+.cover-placeholder {
     width: 100%;
     aspect-ratio: 1 / 1;
-    object-fit: cover;
-}
-
-
-
-
-
-/* Ефект підняття картки альбому при наведенні */
-.hover-card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    cursor: pointer;
-}
-
-.hover-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #282828;
+    color: #6c757d;
+    font-size: 2rem;
+    border-radius: 8px;
 }
 
 /* Стилізація кнопок дій */
 .btn-primary {
     background-color: #6f42c1;
     border-color: #6f42c1;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .btn-primary:hover {
-    background-color: #59359a;
-    border-color: #59359a;
-}
-
-.btn-outline-danger:hover {
-    background-color: #dc3545;
-    color: #fff;
+    background-color: #59319d;
+    border-color: #59319d;
 }

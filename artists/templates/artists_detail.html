@@ -35,16 +35,17 @@
 
                     <!-- Кнопка добавлення в бібліотеку -->
     <div>
+
     {% if user.is_authenticated %}
-    <form action="">
+    <form action="{% url 'artists:toggle_favorite_artist' artist.slug %}" method='POST'>
         {% csrf_token %}
-        {% if is_favorite %}
-        <button type="submit" class="btn btn-outline-danger btn-lg rounded-pill">
-            <i class="fa-solid fa-heart-circle-minus me-2"></i> Remove from library
+        {% if artist in user.favorite_artists.all %}
+        <button type="submit" class="btn btn-neon btn-neon-danger">
+            <i class="fa-solid fa-heart-circle-minus"></i> Remove from library
         </button>
         {% else %}
-        <button type="submit" class="btn btn-primary btn-lg rounded-pill">
-            <i class="fa-solid fa-plus me-2"></i> Add to library
+        <button type="submit" class="btn-neon">
+            <i class="fa-solid fa-plus "></i> Add to library
         </button>
         {% endif %}
     </form>
@@ -86,6 +87,7 @@
             </div>
           </div>
         </div>
+        </a>
       {% empty %}
         <div class="col-12">
           <p class="text-muted">There is no added albums.</p>

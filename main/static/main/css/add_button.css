@@ -1,0 +1,48 @@
+/* Основний стиль неонової кнопки */
+.btn-neon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 28px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #1a1a24;
+    background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
+}
+
+/* Ефект при наведенні (Hover) */
+.btn-neon:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 242, 254, 0.6);
+    color: #ffffff;
+    background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+}
+
+/* Ефект натискання (Active) */
+.btn-neon:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(0, 242, 254, 0.4);
+}
+
+/* Червона варіація кнопки для видалення (Remove) */
+.btn-neon-danger {
+    background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(255, 8, 68, 0.3);
+}
+
+.btn-neon-danger:hover {
+    background: linear-gradient(135deg, #f857a6 0%, #ff5858 100%);
+    box-shadow: 0 8px 25px rgba(255, 8, 68, 0.6);
+    color: #ffffff;
+}

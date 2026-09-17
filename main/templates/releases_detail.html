@@ -3,6 +3,7 @@
 {% block content %}
 <div class="release-detail-container">
 
+
     <!-- Шапка релізу -->
     <div class="release-header">
         <div class="release-cover-wrapper">
@@ -26,6 +27,29 @@
             </div>
         </div>
     </div>
+
+    <!-- Кнопка під обкладинкою -->
+    <div class="mt-3 text-center">
+        {% if user.is_authenticated %}
+            <form action="{% url 'artists:toggle_favorite_releases' release.slug %}" method="post">
+                {% csrf_token %}
+                {% if release in user.favorite_releases.all %}
+                    <button type="submit" class="btn btn-neon btn-neon-danger">
+                        <i class="fa-solid fa-heart-circle-minus"></i> Remove Album
+                    </button>
+                {% else %}
+                    <button type="submit" class="btn-neon">
+                        <i class="fa-solid fa-plus"></i> Add Album
+                    </button>
+                {% endif %}
+            </form>
+        {% else %}
+            <a href="{% url 'users:login' %}" class="btn btn-outline-light w-100 rounded-pill">
+                Log in to add
+            </a>
+        {% endif %}
+    </div>
+</div>
 
     <!-- Опис альбому -->
     {% if release %}
@@ -53,5 +77,4 @@
         </ul>
     </div>
 
-</div>
 {% endblock %}

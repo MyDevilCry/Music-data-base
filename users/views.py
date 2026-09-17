@@ -19,7 +19,7 @@ class UserRegistrationView(CreateView):
         user = form.save()
         login(self.request, user)
         messages.success(self.request, "Ви успішно зареєструвались!")
-        return redirect("users:login")
+        return redirect("users:profile")
 
 
 class UserLoginView(LoginView):
@@ -49,4 +49,4 @@ class UserProfileView(LoginRequiredMixin, UpdateView):
 def logout(request):
     auth.logout(request)
     messages.success(request, "Ви вийшли з акаунту")
-    return redirect("artists:index")
+    return redirect("main:main")
