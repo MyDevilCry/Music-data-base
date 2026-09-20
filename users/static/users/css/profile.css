@@ -18,6 +18,86 @@
     transform: scale(1.03);
 }
 
+/* ==========================================
+   Секція улюблених артистів в профілі
+   ========================================== */
+
+/* Контейнер сітки */
+.fav-artists-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 10px !important;            /* Уменьшили с 20px до 10px */
+    align-items: flex-start;
+    overflow-x: auto;
+    padding-bottom: 10px;
+
+}
+
+/* Елемент одного артиста */
+.fav-artist-item {
+    width: 110px !important;         /* Уменьшили ширину контейнера */
+    min-width: 110px !important;
+    flex: 0 0 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    background: transparent !important; /* Убирает серый фон */
+}
+
+/* Посилання-обгортка */
+.fav-artist-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none !important;
+    width: 100%;
+}
+
+/* Кругла аватарка артиста */
+.fav-artist-avatar {
+    width: 120px !important;       /* Розмір круга */
+    height: 120px !important;
+    aspect-ratio: 1 / 1 !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Ефект підсвічування/збільшення аватара при наведенні */
+.fav-artist-link:hover .fav-artist-avatar {
+    transform: scale(1.08);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.6);
+}
+
+/* Текст назви артиста під аватаркою */
+.fav-artist-name {
+    margin-top: 10px;
+    font-size: 0.85rem;            /* Компактний шрифт */
+    font-weight: 500;
+    color: #ffffff;
+    text-align: center;
+    width: 100%;
+
+    /* Доглянуте обрізання занадто довгих назв */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.2s ease;
+}
+
+/* Підсвічування імені при наведенні */
+.fav-artist-link:hover .fav-artist-name {
+    color: #1db954;
+}
+
+/* Заглушка, якщо немає артистів */
+.fav-artists-empty {
+    width: 100%;
+}
+
 /* Картки улюблених артистів */
 .hover-card {
     background-color: #18181c !important;
@@ -66,6 +146,75 @@
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
 }
+
+
+/* Улюблені релізи в профілі /*
+
+/* Контейнер сітки альбомів — строго в один ряд */
+.fav-albums-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 12px !important;              /* Відстань між альбомами */
+    align-items: flex-start;
+    overflow-x: auto;                  /* Горизонтальний скрол при потребі */
+    padding-bottom: 10px;
+}
+
+/* Елемент одного альбому */
+.fav-album-item {
+    width: 120px !important;           /* Фіксована ширина картки */
+    min-width: 120px !important;
+    flex: 0 0 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    background: transparent !important;
+}
+
+/* Посилання-обгортка */
+.fav-album-link {
+    display: flex !important;
+    flex-direction: column !important;
+    text-decoration: none !important;
+    width: 100%;
+}
+
+/* Квадратна обкладинка альбому */
+.fav-album-cover {
+    width: 120px !important;
+    height: 120px !important;
+    aspect-ratio: 1 / 1 !important;
+    object-fit: cover !important;
+    border-radius: 8px !important;     /* Закруглені кути для квадратів */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    transition: transform 0.25s ease;
+}
+
+.fav-album-link:hover .fav-album-cover {
+    transform: scale(1.05);            /* Легкий зум при наведенні */
+}
+
+/* Назва альбому */
+.fav-album-title {
+    margin-top: 8px;
+    font-size: 0.85rem !important;
+    font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Виконавець альбому */
+.fav-album-artist {
+    font-size: 0.75rem !important;
+    color: #b3b3b3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
 
 /* Адаптивність для мобільних пристроїв */
 @media (max-width: 991.98px) {

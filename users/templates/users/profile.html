@@ -52,22 +52,21 @@
                     <h4 class="fw-bold mb-0"><i class="fa-solid fa-user-group me-2 text-success"></i>Favorite Artists</h4>
                 </div>
 
-                <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3">
+                <div class="fav-artists-grid">
                     {% for artist in user.favorite_artists.all %}
-                        <div class="col">
-                            <a href="{% url 'artists:artists_detail' artist.slug %}" class="text-decoration-none">
-                                <div class="card h-100 bg-dark text-white border-0 shadow-sm rounded-4 p-3 text-center hover-card" style="background-color: #18181c !important;">
+                        <div class="fav-artist-item">
+                            <a href="{% url 'artists:artists_detail' artist.slug %}" class="fav-artist-link">
+
                                     {% if artist.image %}
-                                        <img src="{{ artist.image.url }}" class="rounded-circle object-fit-cover mx-auto mb-2 shadow" style="width: 90px; height: 90px;" alt="{{ artist.name }}">
+                                        <img src="{{ artist.image.url }}" class="fav-artist-avatar" style="width: 90px; height: 90px;" alt="{{ artist.name }}">
                                     {% else %}
-                                        <img src="{% static 'images/default_artist.png' %}" class="rounded-circle object-fit-cover mx-auto mb-2 shadow" style="width: 90px; height: 90px;" alt="{{ artist.name }}">
+                                        <img src="{% static 'images/default_artist.png' %}" class="fav-artist-avatar" style="width: 90px; height: 90px;" alt="{{ artist.name }}">
                                     {% endif %}
-                                    <h6 class="card-title text-truncate fw-bold mb-0 text-white">{{ artist.name }}</h6>
-                                </div>
+                                    <h6 class="fav-artist-name">{{ artist.name }}</h6>
                             </a>
                         </div>
                     {% empty %}
-                        <div class="col-12">
+                        <div class="fav-artists-empty">
                             <div class="p-4 rounded-4 text-center bg-dark text-muted" style="background-color: #18181c !important;">
                                 No favorite artists added yet.
                             </div>
@@ -82,25 +81,25 @@
                     <h4 class="fw-bold mb-0"><i class="fa-solid fa-compact-disc me-2 text-success"></i>Favorite Albums</h4>
                 </div>
 
-                <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3">
+                <div class="fav-albums-grid">
                     {% for releases in user.favorite_releases.all %}
-                        <div class="col">
-                            <a href="{% url 'artists:releases_detail' releases.slug %}" class="album-card-link">
+                        <div class="fav-album-item">
+                            <a href="{% url 'artists:releases_detail' releases.slug %}" class="fav-album-link">
                                 <div class="album-cd-it">
                                     {% if releases.release_image %}
-                                        <img src="{{ releases.release_image.url }}" class="card-img-top rounded-3 object-fit-cover" style="height: 150px;" alt="{{ album.release_name }}">
+                                        <img src="{{ releases.release_image.url }}" class="fav-album-cover" style="height: 150px;" alt="{{ album.release_name }}">
                                     {% else %}
-                                        <img src="{% static 'images/default_cover.png' %}" class="card-img-top rounded-3 object-fit-cover" style="height: 150px;" alt="{{ album.release_name }}">
+                                        <img src="{% static 'images/default_cover.png' %}" class="fav-album-cover" style="height: 150px;" alt="{{ album.release_name }}">
                                     {% endif %}
                                     <div class="card-body p-2 text-center">
-                                        <h6 class="card-title text-truncate fw-bold mb-1">{{ releases.release_name }}</h6>
-                                        <p class="card-text text-muted small mb-0 text-truncate">{{ releases.artists.name }}</p>
+                                        <h6 class="fav-album-title">{{ releases.release_name }}</h6>
+                                        <p class="fav-album-artist">{{ releases.artists.name }}</p>
                                     </div>
                                 </div>
                             </a>
                         </div>
                     {% empty %}
-                        <div class="col-12">
+                        <div class="w-100">
                             <div class="p-4 rounded-4 text-center bg-dark text-muted" style="background-color: #18181c !important;">
                                 No favorite albums added yet.
                             </div>

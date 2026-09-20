@@ -47,10 +47,10 @@
 
                     <!--Секція 3: Альбоми-->
         <section class="music-section">
-            <h2 class="section-title"> Recommended albums </h2>
+            <h2 class="section-title"> Recommended releases </h2>
             <div class="horizontal-scroll releases-scroll">
                 {% for release in random_release %}
-                <a href="{% url 'artists:releases_detail' release.slug %}" class="album-artist-card"></a>
+                <a href="{% url 'artists:releases_detail' release.slug %}" class="album-artist-card">
                 <div class="album-card">
                  <div class="cover-wrapper">
                      {% if release.release_image %}
@@ -59,11 +59,12 @@
                      <div class="cover-placeholder">🎵</div>
                      {% endif %}
                  </div>
+
                     <p class="card-title">{{release.release_name}}</p>
                     <p class="card-subtitle">{{release.artists.name}} </p>
                     <p class="card-text text-muted small card-subtitle">{{release.release_date }}</p>
                 </div>
-
+                </a>
                 {% empty %}
                 <p class="empty-text"> There is no releases </p>
                 {% endfor %}

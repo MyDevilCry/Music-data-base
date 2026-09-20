@@ -32,6 +32,16 @@
     object-fit: cover;
 }
 
+.btn-neon {
+    margin-top: -20;
+    margin-left: 35px;
+}
+
+.btn-neon-danger {
+    margin-top: -20;
+    margin-left: 15px;
+}
+
 .release-info {
     display: flex;
     flex-direction: column;

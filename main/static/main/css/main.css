@@ -208,34 +208,50 @@ body {
 }
 
 /* Грид сітка для Жанрів */
-.genres-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    letter-spacing
+/* Контейнер для плашок жанрів */
+.grid-container.genres-grid {
     display: flex;
+    flex-wrap: wrap;
+    gap: 12px; /* Відстань між плашками */
+    align-items: center;
+}
+
+/* Сама плашка жанру */
+.genre-card {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-}
 
-.genre-card {
-    background: linear-gradient(135deg, #2a2a2a, #1f1f1f);
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: 600;
-    border: 1px solid #333;
+    height: 48px;               /* Фіксована однакова висота для ВСІХ жанрів */
+    padding: 0 20px;            /* Відступи зліва/справа, щоб плашка розширювалася під текст */
+
+    background-color: #222222;  /* Темно-сірий фон картки */
+    border-radius: 8px;         /* Охайне закруглення кутів */
+    border: 1px solid #333333;  /* Легкий контур */
+
     cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
+/* Текст всередині плашки */
+.genre-card span {
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    white-space: nowrap;        /* Забороняє перенос тексту, вирівнюючи висоту */
+}
+
+/* Ефект при наведенні */
 .genre-card:hover {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    transform: translateY(-3px);
+    background-color: #2b2b2b;
+    border-color: #444444;
+    transform: translateY(-2px);
 }
 
 /* Скролл для Альбомів (Горизонтальне листання) */
 .horizontal-scroll {
     display: flex;
-    gap: 20px;
+    gap: 12px;
     overflow-x: auto;
     padding-bottom: 15px;
     scroll-behavior: smooth;
@@ -255,9 +271,40 @@ body {
 }
 .horizontal-scroll::-webkit-scrollbar-thumb:hover {
     background: #2563eb;
+
+}
+
+
+/* Скидаємо стилі посилання для всієї картки */
+.album-artist-card {
+    text-decoration: none !important; /* Прибирає підкреслення */
+    color: inherit !important;          /* Успадковує нормальний колір тексту */
+    display: block;
+}
+
+/* Примусово задаємо білий колір для назви альбому */
+.album-artist-card .card-title {
+    color: #ffffff !important;
+}
+
+/* Колір для імені артиста */
+.album-artist-card .card-subtitle {
+    color: #b3b3b3 !important;
+}
+
+/* Колір для дати релізу */
+.album-artist-card .card-text {
+    color: #888888 !important;
+}
+
+/* Невеликий ефект підсвічування назви при наведенні */
+.album-artist-card:hover .card-title {
+    color: #1db954 !important; /* Або ваш акцентний колір */
 }
 
 .album-card {
+    text-decoration: none !important; /* Прибирає підкреслення */
+    color: inherit !important;
     min-width: 160px;
     width: 160px;
     background-color: #1e1e1e;
