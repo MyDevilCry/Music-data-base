@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, ListView
 
-from artists.models import Artists, Release
+from artists.models import Artists, Genre, Release
 from main.services import fetch_and_save_album_data, get_wikipedia_album_summary
 
 User = get_user_model()
@@ -33,6 +33,23 @@ def toggle_favorite_artists(request,slug):
         request.user.favorite_artists.add(artist)
 
     return redirect('artists:artists_detail',slug=slug)
+
+
+
+class GenreDetailView(ListView):
+    model = Artists
+    template_name = "genres.html"
+    context_object_name = "artists"
+
+    def get_queryset(self):
+        genre_slug = self.kwargs['slug']
+        return Artists.objects.filter(genre__slug=genre_slug)
+
+
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        context["genre"] = Genre.objects.get(slug=self.kwargs["slug"])
+        return context
 
 
 

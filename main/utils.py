@@ -11,7 +11,7 @@ from artists.models import Artists
 def q_search(query):
     if query.isdigit() and len(query) <= 5:
         return Artists.objects.filter(id=int(query))
-    vector = SearchVector("name", "description")
+    vector = SearchVector("name", "description","genre",)
     query = SearchQuery(query)
 
     result = (
@@ -26,11 +26,15 @@ def q_search(query):
             query,
             start_sel='<span style="background-color:yellow;">',
             stop_sel="</span>",
-        )
-    )
-    result = result.annotate(
+        ),
         bodyline=SearchHeadline(
             "description",
+            query,
+            start_sel='<span style="background-color:yellow;">',
+            stop_sel="</span>",
+        ),
+        genreline=SearchHeadline(
+            "genre",
             query,
             start_sel='<span style="background-color:yellow;">',
             stop_sel="</span>",

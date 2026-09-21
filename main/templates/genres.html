@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if genre %}
+        Artists in {{ genre.name }} — MusicDataBase
+    {% else %}
+        Genre Artists — MusicDataBase
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container py-4 text-white">
+
+    <!-- Заголовок сторінки жанру -->
+    <div class="d-flex align-items-center justify-content-between mb-4 border-bottom border-secondary pb-3">
+        <div>
+            <span class="text-muted small text-uppercase fw-bold tracking-wide">Genre</span>
+            <h2 class="fw-bold mb-0 text-success">
+                <i class="fa-solid fa-guitar me-2"></i>
+                {% if genre %}
+                    {{ genre.name }}
+                {% else %}
+                    Artists List
+                {% endif %}
+            </h2>
+        </div>
+        <a href="{% url 'main:search_result' %}" class="btn btn-outline-light btn-sm rounded-pill px-3">
+            <i class="fa-solid fa-arrow-left me-1"></i> Back
+        </a>
+    </div>
+
+    <!-- Сітка артистів -->
+    <div class="fav-artists-grid">
+        {% for artist in artists %}
+            <div class="fav-artist-item">
+                <a href="{% url 'artists:artists_detail' artist.slug %}" class="fav-artist-link">
+                    {% if artist.image %}
+                        <img src="{{ artist.image.url }}" class="fav-artist-avatar" alt="{{ artist.name }}">
+                    {% else %}
+                        <img src="{% static 'images/default_artist.png' %}" class="fav-artist-avatar" alt="{{ artist.name }}">
+                    {% endif %}
+
+                    <span class="fav-artist-name">{{ artist.name }}</span>
+                </a>
+            </div>
+        {% empty %}
+            <!-- Повідомлення, якщо в цьому жанрі немає артистів -->
+            <div class="w-100 py-5 text-center">
+                <div class="p-4 rounded-4 bg-dark text-muted d-inline-block px-5 border border-secondary">
+                    <i class="fa-solid fa-compact-disc fa-2x mb-3 d-block opacity-50"></i>
+                    No artists found for this genre yet.
+                </div>
+            </div>
+      {% endfor %}
+    </div>
+
+</div>
+{% endblock %}
