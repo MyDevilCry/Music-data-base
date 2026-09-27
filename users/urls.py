@@ -10,3 +10,5 @@ urlpatterns = [
     path("profile/", views.UserProfileView.as_view(), name="profile"),
     path("logout/", views.logout, name="logout"),
 ]
+
+

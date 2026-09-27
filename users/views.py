@@ -1,4 +1,4 @@
-from django.contrib import auth, messages
+from django.contrib import auth
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
@@ -18,7 +18,6 @@ class UserRegistrationView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        messages.success(self.request, "Ви успішно зареєструвались!")
         return redirect("users:profile")
 
 
@@ -27,10 +26,6 @@ class UserLoginView(LoginView):
     form_class = UserLoginForm
     success_url = reverse_lazy("users:login")
 
-    def form_valid(self, form):
-        username = form.cleaned_data.get("username")
-        messages.success(self.request, f" {username} Ви успішно авторизувались!")
-        return super().form_valid(form)
 
 
 class UserProfileView(LoginRequiredMixin, UpdateView):
@@ -38,15 +33,10 @@ class UserProfileView(LoginRequiredMixin, UpdateView):
     form_class = ProfileForm
     success_url = reverse_lazy("users:profile")
 
+
     def get_object(self, queryset=None):
         return self.request.user
 
-    def form_valid(self, form):
-        messages.success(self.request, "Ви успішно оновили профіль")
-        return super().form_valid(form)
-
-
 def logout(request):
     auth.logout(request)
-    messages.success(request, "Ви вийшли з акаунту")
     return redirect("main:main")

@@ -9,14 +9,12 @@
     <link rel="stylesheet" href="{% static 'artists/css/artists_detail.css'%}">
     <link rel="stylesheet" href="{% static 'main/css/releases_detail.css'%}">
     <link rel="stylesheet" href="{% static 'users/css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'users/css/profile_scrollbar.css' %}">
 
     {% block extra_head %}
     {% endblock %}
 </head>
-
 <body>
-
-
 
     <!-- Шапка -->
     <header class="navbar">
@@ -41,5 +39,7 @@
         {% include 'artists_detail.html' %}
         {% endblock %}
     </main>
+
+
 </body>
 </html>

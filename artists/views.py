@@ -4,7 +4,11 @@ from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, ListView
 
 from artists.models import Artists, Genre, Release
-from main.services import fetch_and_save_album_data, get_wikipedia_album_summary
+from main.services import (
+    fetch_and_save_album_data,
+    fetch_and_save_artist_data,
+    get_wikipedia_album_summary,
+)
 
 User = get_user_model()
 
@@ -14,13 +18,25 @@ class ArtistsDetailView(DetailView):
     template_name = "artists_detail.html"
     context_object_name = "artist"
 
+    def get_queryset(self):
+        return super().get_queryset().prefetch_related("genre")
+
+    def get_object(self,queryset=None):
+        artists = super().get_object(queryset)
+
+        if not artists.description:
+            fetch_and_save_artist_data(artists.id)
+            artists.refresh_from_db()
+
+        return artists
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         artists = self.get_object()
         context["release_artist_detail"] = Release.objects.filter(
             artists=artists
-        ).order_by("release_date")
+        ).order_by("release_date").prefetch_related("genres","artists")
         return context
 
 @login_required
@@ -36,6 +52,8 @@ def toggle_favorite_artists(request,slug):
 
 
 
+
+
 class GenreDetailView(ListView):
     model = Artists
     template_name = "genres.html"
@@ -43,7 +61,7 @@ class GenreDetailView(ListView):
 
     def get_queryset(self):
         genre_slug = self.kwargs['slug']
-        return Artists.objects.filter(genre__slug=genre_slug)
+        return Artists.objects.filter(genre__slug=genre_slug).prefetch_related("genre")
 
 
     def get_context_data(self,**kwargs):
@@ -57,11 +75,14 @@ class GenreDetailView(ListView):
 class ReleasesView(ListView):
     model = Release
     template_name = "artists/releases.html"
-    context_object_name = "Releases"
+    context_object_name = "releases"
+
+    def get_queryset(self):
+        return Release.objects.prefetch_related("genres", "artists")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["random_release"] = Release.objects.all()
+        context["releases"] = Release.objects.all()
         return context
 
 
@@ -69,6 +90,9 @@ class ReleasesDetailView(DetailView):
     model = Release
     template_name = "releases_detail.html"
     context_object_name = "release"
+
+    def get_queryset(self):
+        return super().get_queryset().prefetch_related("artists", "genres", "tracks")
 
     def get_object(self, queryset = None):
         obj = super().get_object(queryset)
@@ -78,7 +102,8 @@ class ReleasesDetailView(DetailView):
             obj.refresh_from_db()
 
         if not obj.release_description:
-            artist_name = obj.artists.name if hasattr(obj, 'artists') and obj.artists else ""
+            first_artists = obj.artists.first()
+            artist_name = obj.artists.name if first_artists else ""
             wiki_summary = get_wikipedia_album_summary(obj.release_name,artist_name)
 
             if wiki_summary:

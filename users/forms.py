@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.urls import reverse_lazy
 
 User = get_user_model()
 
@@ -50,9 +49,7 @@ class UserLoginForm(AuthenticationForm):
 
 
 class ProfileForm(forms.ModelForm):
-    template_name = "users:profile"
-    success_url = reverse_lazy("users:profile")
-
     class Meta:
         model = User
-        fields = ("username", "first_name", "last_name", "email")
+        fields = ("username", "first_name", "last_name", "email", "image")
+

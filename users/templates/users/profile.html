@@ -1,7 +1,10 @@
 {% extends 'main.html' %}
 {% load static %}
-
 {% block content %}
+
+
+
+
 <div class="container py-4 text-white">
     <div class="row g-4">
 
@@ -9,39 +12,43 @@
         <div class="col-lg-4">
             <div class="card bg-dark text-white border-0 shadow-lg rounded-4 p-4 text-center position-sticky" style="top: 90px; background-color: #16181c !important;">
 
-                <!-- Аватарка -->
-                <div class="position-relative d-inline-block mx-auto mb-3">
-                    {% if user.profile.avatar %}
-                        <img src="{{ user.profile.avatar.url }}" alt="{{ user.username }}" class="rounded-circle object-fit-cover shadow-lg border border-secondary border-2" width="140" height="140">
-                    {% else %}
-                        <img src="{% static 'images/default_avatar.png' %}" alt="{{ user.username }}" class="rounded-circle object-fit-cover shadow-lg border border-secondary border-2" width="140" height="140">
-                    {% endif %}
-                </div>
 
-                <!-- Юзернейм та Пошта -->
-                <h3 class="fw-bold mb-1">{{ user.username }}</h3>
-                <p class="text-muted small mb-3"><i class="fa-regular fa-envelope me-1"></i>{{ user.email }}</p>
+              <div class="profile-card text-center mx-auto">
+    <form action="{% url 'users:profile' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
 
-                <div class="d-flex justify-content-center gap-2 mb-4">
-                    <span class="badge bg-secondary opacity-75 rounded-pill px-3 py-2">Music Enthusiast</span>
-                </div>
+        <!-- АВА З ІКОНКОЮ КАМЕРИ -->
+        <div class="avatar-wrapper">
+            {% if user.image %}
+                <img src="{{ user.image.url }}" alt="{{ user.username }}" class="avatar-img">
+            {% else %}
+                <img src="{% static 'deps/images/baseavatar.jpg' %}" alt="{{ user.username }}" class="avatar-img">
+            {% endif %}
 
-                <!-- Кнопки управління (Редагувати та Вихід) -->
-                <div class="d-grid gap-2">
-                    <a href="#" class="btn btn-outline-light rounded-pill font-weight-bold">
-                        <i class="fa-solid fa-pen-to-square me-2"></i>Edit Profile
-                    </a>
-
-                    <form action="{% url 'users:logout' %}" method="post" class="d-grid">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-danger rounded-pill fw-bold">
-                            <i class="fa-solid fa-right-from-bracket me-2"></i>Log Out
-                        </button>
-                    </form>
-                </div>
-
-            </div>
+            <!-- Прихований файл-інпут + плаваюча кнопка -->
+            <input type="file" name="image" id="avatarInput" accept="image/*" class="d-none">
+            <label for="avatarInput" class="camera-badge" title="Змінити аватарку">
+                <i class="fa-solid fa-camera"></i>
+            </label>
         </div>
+
+        <!-- ІНПУТ USERNAME -->
+        <div class="mb-3 text-start">
+            <label for="id_username" class="form-label text-secondary small ms-1 mb-1 fw-semibold">Username</label>
+            <input type="text" name="username" id="id_username" class="form-control profile-input" value="{{ form.username.value|default:user.username }}" required>
+        </div>
+
+        <!-- КНОПКА ЗБЕРЕЖЕННЯ -->
+        <button type="submit" class="btn btn-save w-100 mb-3">
+            Зберегти зміни
+        </button>
+    </form>
+
+    <!-- КНОПКА ВИХОДУ -->
+    <a href="{% url 'users:logout' %}" class="btn-logout d-inline-block">
+        Log Out
+    </a>
+</div>
 
         <!-- ПРАВА КОЛОНКА: Улюблені артисти та Альбоми -->
         <div class="col-lg-8">
@@ -75,6 +82,17 @@
                 </div>
             </div>
 
+
+            <div class="position-relative mb-4">
+            <!-- Кнопка вліво -->
+            <button class="scroll-btn left" onclick="scrollContainer('artistsScroll', -300)">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+            <!-- Скролл-контейнер без видимого скроллбара -->
+            <div id="artistsScroll" class="d-flex align-items-center gap-3 overflow-hidden-scroll pe-2">
+
+
             <!-- Секція: Улюблені альбоми -->
             <div>
                 <div class="d-flex align-items-center justify-content-between mb-3 border-bottom border-secondary pb-2">
@@ -107,8 +125,11 @@
                     {% endfor %}
                 </div>
             </div>
-
         </div>
+            </div>
+        </div>
+    </div>
+</div>
     </div>
 </div>
 {% endblock %}

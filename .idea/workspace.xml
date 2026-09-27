@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d7285208-19ea-46a3-9fa4-b673ba485115" name="Изменения" comment="Зробив правки в html + css в профілі">
-      <change afterPath="$PROJECT_DIR$/main/templates/genres.html" afterDir="false" />
+    <list default="true" id="d7285208-19ea-46a3-9fa4-b673ba485115" name="Изменения" comment="Налаштував пошуки по жанрах">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artists/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/artists/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artists/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/artists/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/artists/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/artists/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/artists/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/artists/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/services.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/static/users/css/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/users/static/users/css/profile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +61,7 @@
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jane2/PycharmProjects/music_data_base/media/users-avatar&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -65,6 +72,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jane2\PycharmProjects\music_data_base\media\users-avatar" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\jane2\PycharmProjects\music_data_base\media\artists" />
       <recent name="C:\Users\jane2\PycharmProjects\music_data_base\media" />
@@ -206,7 +216,15 @@
       <option name="project" value="LOCAL" />
       <updated>1789909961984</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Налаштував пошуки по жанрах">
+      <option name="closed" value="true" />
+      <created>1790009863764</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1790009863764</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -236,6 +254,7 @@
     <MESSAGE value="Додав автододавання інформації про альбоми + розбираюсь з html версткою" />
     <MESSAGE value="Оновив профіль + оновив верстку(ще не до кінця)" />
     <MESSAGE value="Зробив правки в html + css в профілі" />
-    <option name="LAST_COMMIT_MESSAGE" value="Зробив правки в html + css в профілі" />
+    <MESSAGE value="Налаштував пошуки по жанрах" />
+    <option name="LAST_COMMIT_MESSAGE" value="Налаштував пошуки по жанрах" />
   </component>
 </project>

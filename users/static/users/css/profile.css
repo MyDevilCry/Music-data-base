@@ -1,21 +1,105 @@
-/* ==========================================
-   Профіль користувача (Profile Styles)
-   ========================================== */
-
-/* Фіксована ліва картка (Сайдбар профілю) */
-.position-sticky {
-    top: 90px;
-    z-index: 10;
+/* Основний контейнер картки профілю */
+.profile-card {
+    max-width: 340px;
+    background-color: #161a1d;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1.75rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* Аватарка профілю */
-.position-relative img {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease;
+/* Обгортка для круглої аватарки */
+.avatar-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1.25rem;
 }
 
-.position-relative img:hover {
-    transform: scale(1.03);
+.avatar-img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #2b3035;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.avatar-wrapper:hover .avatar-img {
+    border-color: #0d6efd;
+}
+
+/* Кругла кнопка з камери заповнена синім кольором */
+.camera-badge {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 38px;
+    height: 38px;
+    background-color: #0d6efd;
+    color: #ffffff;
+    border-radius: 50%;
+    border: 3px solid #161a1d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.camera-badge:hover {
+    background-color: #0b5ed7;
+    transform: scale(1.1);
+}
+
+/* Стилізація текстового інпута */
+.profile-input {
+    background-color: #212529 !important;
+    border: 1px solid #373b3e !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-input:focus {
+    border-color: #0d6efd !important;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+}
+
+/* Кнопка збереження */
+.btn-save {
+    background-color: #0d6efd;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 0.55rem;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-save:hover {
+    background-color: #0b5ed7;
+}
+
+.btn-save:active {
+    transform: scale(0.98);
+}
+
+/* Посилання виходу */
+.btn-logout {
+    color: #dc3545;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-logout:hover {
+    color: #ff4d5e;
+    text-decoration: underline;
 }
 
 /* ==========================================

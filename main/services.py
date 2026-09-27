@@ -1,7 +1,7 @@
 import requests
 from ytmusicapi import YTMusic
 
-from artists.models import Release, Track
+from artists.models import Artists, Release, Track
 
 
 def fetch_and_save_album_data(release_id):
@@ -40,6 +40,33 @@ def fetch_and_save_album_data(release_id):
     return True
 
 
+def fetch_and_save_artist_data(artist_id):
+    try:
+        artist = Artists.objects.get(id=artist_id)
+    except Artists.DoesNotExist:
+        return False
+
+    yt = YTMusic()
+
+    # Шукаємо артиста в YT Music за його ім'ям
+    search_results = yt.search(artist.name, filter='artists')
+    if not search_results:
+        return False
+
+    # Отримуємо browseId першого знайденого виконавця
+    browse_id = search_results[0]['browseId']
+
+    # Отримуємо повні дані про артиста
+    artist_data = yt.get_artist(browse_id)
+
+    # Оновлюємо опис артиста, якщо він є у відповіді
+    if artist_data.get('description') and not getattr(artist, 'description', None):
+        artist.description = artist_data['description']
+        artist.save()
+
+    return True
+
+
 def get_wikipedia_album_summary(album_name, artist_name, lang='en'):
     user_agent = "MusicDataBaseApp/1.0 (contact@example.com)"
     headers = {'User-Agent':user_agent}
@@ -62,7 +89,7 @@ def get_wikipedia_album_summary(album_name, artist_name, lang='en'):
 
             return summary_res.get('extract', '')
 
-    except Exception as e:
+    except requests.RequestException as e:
         print(f" Error : {e}")
 
     return ""

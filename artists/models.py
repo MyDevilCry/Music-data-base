@@ -6,7 +6,7 @@ from django.utils.text import slugify
 class Genre(models.Model):
     name = models.CharField(max_length=100, verbose_name="Назва жанру", unique=True)
     slug = models.SlugField(
-        max_length=250, unique=True, blank=True, null=True, db_index=True
+        max_length=250, unique=True, db_index=True
     )
 
     def __str__(self):
@@ -23,11 +23,11 @@ class Artists(models.Model):
         choices=TYPE_CHOICES,
     )
     slug = models.SlugField(
-        max_length=250, unique=True, blank=True, null=True, db_index=True
+        max_length=250, unique=True, db_index=True
     )
     name = models.CharField(max_length=100, verbose_name="Назва виконавця")
     genre = models.ManyToManyField(Genre, verbose_name="Жанри")
-    description = models.TextField(max_length=5000, verbose_name="Опис артиста")
+    description = models.TextField(max_length=5000, blank=True, null=True, verbose_name="Опис артиста")
     year_formed = (
         models.PositiveIntegerField(
             verbose_name="Дата створення гурту або артиста",
@@ -56,7 +56,7 @@ class Track(models.Model):
     )
 
     class Meta:
-        ordering = ["position"]
+        ordering = ("position",)
 
     def __str__(self):
         return f"{self.position}. {self.title}"
