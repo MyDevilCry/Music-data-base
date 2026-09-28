@@ -1,5 +1,7 @@
 import requests
+import wikipedia
 from ytmusicapi import YTMusic
+
 
 from artists.models import Artists, Release, Track
 
@@ -46,25 +48,41 @@ def fetch_and_save_artist_data(artist_id):
     except Artists.DoesNotExist:
         return False
 
-    yt = YTMusic()
+    if getattr(artist, 'is_fetched', False):
+        return True
 
-    # Шукаємо артиста в YT Music за його ім'ям
-    search_results = yt.search(artist.name, filter='artists')
-    if not search_results:
-        return False
+    wikipedia.set_lang('en')
 
-    # Отримуємо browseId першого знайденого виконавця
-    browse_id = search_results[0]['browseId']
+    search_queries = [
+        artist.name,
+        f"{artist.name} (band)",
+        f"{artist.name} band"
+    ]
 
-    # Отримуємо повні дані про артиста
-    artist_data = yt.get_artist(browse_id)
+    for query in search_queries:
+        try:
+            search_results = wikipedia.search(query)
+            if not search_results:
+                continue
 
-    # Оновлюємо опис артиста, якщо він є у відповіді
-    if artist_data.get('description') and not getattr(artist, 'description', None):
-        artist.description = artist_data['description']
-        artist.save()
+            for page_title in search_results[:3]:  # Перевіряємо перші 3 результати
+                try:
+                    summary_text = wikipedia.summary(page_title, sentences=5, auto_suggest=False)
 
-    return True
+                    # Відсіюємо сторінки неоднозначності
+                    if "may refer to" not in summary_text.lower():
+                        artist.description = summary_text
+                        artist.is_fetched = True
+                        artist.save()
+                        return True
+                except (wikipedia.DisambiguationError, wikipedia.PageError):
+                    continue  # Якщо ця конкретна сторінка не підійшла — пробуємо наступну
+        except Exception as e:
+            print(f"Error searching Wikipedia for query '{query}': {e}")
+
+    return False
+
+
 
 
 def get_wikipedia_album_summary(album_name, artist_name, lang='en'):

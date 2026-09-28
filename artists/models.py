@@ -28,6 +28,7 @@ class Artists(models.Model):
     name = models.CharField(max_length=100, verbose_name="Назва виконавця")
     genre = models.ManyToManyField(Genre, verbose_name="Жанри")
     description = models.TextField(max_length=5000, blank=True, null=True, verbose_name="Опис артиста")
+    is_fetched = models.BooleanField(default=False)
     year_formed = (
         models.PositiveIntegerField(
             verbose_name="Дата створення гурту або артиста",
@@ -80,6 +81,7 @@ class Release(models.Model):
     genres = models.ManyToManyField(
         to=Genre, max_length=50, blank=True, verbose_name="Жанри релізу"
     )
+    is_yt_fetched = models.BooleanField(default=False)
     release_name = models.CharField(max_length=50, verbose_name="Назва релізу")
     release_date = models.DateField(verbose_name="Дата видання релізу")
     release_description = models.TextField(max_length=500, null=True, blank=True, verbose_name="Опис релізу")
