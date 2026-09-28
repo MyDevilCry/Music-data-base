@@ -75,14 +75,13 @@ def fetch_and_save_artist_data(artist_id):
                         artist.is_fetched = True
                         artist.save()
                         return True
+
                 except (wikipedia.DisambiguationError, wikipedia.PageError):
                     continue  # Якщо ця конкретна сторінка не підійшла — пробуємо наступну
         except Exception as e:
             print(f"Error searching Wikipedia for query '{query}': {e}")
 
     return False
-
-
 
 
 def get_wikipedia_album_summary(album_name, artist_name, lang='en'):

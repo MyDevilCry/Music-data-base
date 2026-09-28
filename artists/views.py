@@ -2,8 +2,13 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, ListView
+from rest_framework import viewsets
+from rest_framework.filters import SearchFilter
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
 
 from artists.models import Artists, Genre, Release
+from artists.serializers import ArtistSerializer, ArtistDetailSerializer, ReleaseDetailSerializer, ReleaseSerializer
 from main.services import (
     fetch_and_save_album_data,
     fetch_and_save_artist_data,
@@ -24,7 +29,7 @@ class ArtistsDetailView(DetailView):
     def get_object(self,queryset=None):
         artists = super().get_object(queryset)
 
-        if not artists.description:
+        if not artists.is_fetched:
             fetch_and_save_artist_data(artists.id)
             artists.refresh_from_db()
 
@@ -33,9 +38,8 @@ class ArtistsDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        artists = self.get_object()
         context["release_artist_detail"] = Release.objects.filter(
-            artists=artists
+            artists=self.object
         ).order_by("release_date").prefetch_related("genres","artists")
         return context
 
@@ -92,7 +96,7 @@ class ReleasesDetailView(DetailView):
     context_object_name = "release"
 
     def get_queryset(self):
-        return super().get_queryset().prefetch_related("artists", "genres", "tracks")
+        return super().get_queryset().select_related("artists").prefetch_related("artists", "genres", "tracks")
 
     def get_object(self, queryset = None):
         obj = super().get_object(queryset)
@@ -102,8 +106,7 @@ class ReleasesDetailView(DetailView):
             obj.refresh_from_db()
 
         if not obj.release_description:
-            first_artists = obj.artists.first()
-            artist_name = obj.artists.name if first_artists else ""
+            artist_name = obj.artists.name if obj.artists else ""
             wiki_summary = get_wikipedia_album_summary(obj.release_name,artist_name)
 
             if wiki_summary:
@@ -122,3 +125,28 @@ def toggle_favorite_releases(request, slug):
 
     return redirect('artists:releases_detail', slug=slug)
 
+
+class ArtistViewSet(viewsets.ModelViewSet):
+    queryset = Artists.objects.prefetch_related('genre').all()
+    filter_backends = [SearchFilter]
+    search_fields = ('name','slug','year_formed','genre__name')
+    permission_class = [IsAuthenticatedOrReadOnly]
+    lookup_field = 'slug'
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return ArtistDetailSerializer
+        return ArtistSerializer
+
+
+class ReleaseViewSet(viewsets.ModelViewSet):
+    queryset = Release.objects.prefetch_related('genres','artists').all()
+    filter_backends = [SearchFilter]
+    search_fields = ('name','slug','year_formed','release__name')
+    permission_class = [IsAuthenticatedOrReadOnly]
+    lookup_field = 'slug'
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return ReleaseDetailSerializer
+        return ReleaseSerializer

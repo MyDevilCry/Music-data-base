@@ -33,7 +33,7 @@ class Artists(models.Model):
         models.PositiveIntegerField(
             verbose_name="Дата створення гурту або артиста",
             validators=[MinValueValidator(1900), MaxValueValidator(2026)],
-        ),
+        )
     )
     image = models.ImageField(upload_to="artists", verbose_name="Фото артиста")
 

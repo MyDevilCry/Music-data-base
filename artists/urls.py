@@ -1,11 +1,18 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 
 from artists import views
+from artists.views import ArtistViewSet, ReleaseViewSet
 
 app_name = "artists"
 
+router = DefaultRouter()
+router.register('artists',ArtistViewSet,basename='artist')
+router.register('releases',ReleaseViewSet,basename='release')
+
 urlpatterns = [
     path("", views.ListView.as_view(), name="main"),
+    path('api/', include(router.urls)),
     path("releases", views.ReleasesView.as_view(), name="releases"),
     path("genre/<slug:slug>/",views.GenreDetailView.as_view(), name= "genre_detail"),
     path("release/<slug:slug>/",views.ReleasesDetailView.as_view(), name="releases_detail"),

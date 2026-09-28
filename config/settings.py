@@ -37,15 +37,23 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'rest_framework',
+    'debug_toolbar',
     "artists",
     "users",
     "main",
+]
+
+
+INTERNAL_IPS = [
+    '127.0.0.1',
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -121,6 +129,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'rest_framework_simplejwt.authentication.JWTAuthentication',
+    'rest_framework.authentication.SessionAuthentication',
+    ),
+    'PAGE_SIZE': 2,  # Поставимо 2 для тесту, щоб одразу побачити розділення на сторінки
+}
 
 
 AUTH_USER_MODEL = "users.User"

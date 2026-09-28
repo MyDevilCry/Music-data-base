@@ -7,6 +7,7 @@ from artists.models import Artists, Genre, Release
 class MainView(TemplateView):
     template_name = "main.html"
 
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["artists"] = Artists.objects.prefetch_related("genre").order_by("?")[:10]
@@ -38,5 +39,16 @@ class SearchResultsView(TemplateView):
             ).prefetch_related("artists","genres").distinct()
             context["query"] = query
         return context
+
+
+
+
+
+
+
+
+
+
+
 
 
