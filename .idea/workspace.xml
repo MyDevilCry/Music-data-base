@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d7285208-19ea-46a3-9fa4-b673ba485115" name="Изменения" comment="Переробив пошук інформації про артистів + переніс БД на postgreSQL">
-      <change afterPath="$PROJECT_DIR$/artists/serializers.py" afterDir="false" />
+    <list default="true" id="d7285208-19ea-46a3-9fa4-b673ba485115" name="Изменения" comment="Зробив правки">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/artists/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/artists/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/artists/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/artists/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/artists/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/artists/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,24 +44,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/jane2/PycharmProjects/music_data_base/media/users-avatar",
-    "settings.editor.selected.configurable": "editor.preferences.inline.completion"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jane2/PycharmProjects/music_data_base/media/users-avatar&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.inline.completion&quot;
   },
-  "keyToStringList": {
-    "ChangesTree.GroupingKeys": [
-      "directory",
-      "repository"
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;repository&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\jane2\PycharmProjects\music_data_base\media\users-avatar" />
@@ -236,7 +231,15 @@
       <option name="project" value="LOCAL" />
       <updated>1790594942990</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Зробив правки">
+      <option name="closed" value="true" />
+      <created>1791635186023</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1791635186023</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -269,6 +272,7 @@
     <MESSAGE value="Налаштував пошуки по жанрах" />
     <MESSAGE value="Зробив менше запитів до БД + розширив адмінку, зробив деякі правки" />
     <MESSAGE value="Переробив пошук інформації про артистів + переніс БД на postgreSQL" />
-    <option name="LAST_COMMIT_MESSAGE" value="Переробив пошук інформації про артистів + переніс БД на postgreSQL" />
+    <MESSAGE value="Зробив правки" />
+    <option name="LAST_COMMIT_MESSAGE" value="Зробив правки" />
   </component>
 </project>

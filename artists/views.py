@@ -24,7 +24,7 @@ class ArtistsDetailView(DetailView):
     context_object_name = "artist"
 
     def get_queryset(self):
-        return super().get_queryset().prefetch_related("genre")
+        return super().get_queryset()
 
     def get_object(self,queryset=None):
         artists = super().get_object(queryset)
@@ -38,9 +38,9 @@ class ArtistsDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["release_artist_detail"] = Release.objects.filter(
+        context["release_artist_detail"] = Release.objects.published_with_relations().filter(
             artists=self.object
-        ).order_by("release_date").prefetch_related("genres","artists")
+        )
         return context
 
 @login_required
@@ -65,7 +65,7 @@ class GenreDetailView(ListView):
 
     def get_queryset(self):
         genre_slug = self.kwargs['slug']
-        return Artists.objects.filter(genre__slug=genre_slug).prefetch_related("genre")
+        return Artists.objects.filter(genre__slug=genre_slug).with_genre()
 
 
     def get_context_data(self,**kwargs):
@@ -82,12 +82,7 @@ class ReleasesView(ListView):
     context_object_name = "releases"
 
     def get_queryset(self):
-        return Release.objects.prefetch_related("genres", "artists")
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["releases"] = Release.objects.all()
-        return context
+        return Release.objects.published_with_relations()
 
 
 class ReleasesDetailView(DetailView):
@@ -96,7 +91,7 @@ class ReleasesDetailView(DetailView):
     context_object_name = "release"
 
     def get_queryset(self):
-        return super().get_queryset().select_related("artists").prefetch_related("artists", "genres", "tracks")
+        return Release.objects.published_with_relations()
 
     def get_object(self, queryset = None):
         obj = super().get_object(queryset)

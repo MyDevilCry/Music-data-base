@@ -10,14 +10,14 @@ class MainView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["artists"] = Artists.objects.prefetch_related("genre").order_by("?")[:10]
-        context["genres"] = Genre.objects.all().order_by("?")[:16]
-        context["random_release"] = Release.objects.filter(
+        context["artists"] = Artists.objects.with_genres().order_by("?")[:10]
+        context["genres"] = Genre.objects.order_by("?")[:16]
+        context["random_release"] = Release.objects.published_with_relations().filter(
             release_type__in=[
                 "Album",
                 "EP",
             ]
-        ).prefetch_related("artists","genres").order_by("?")[:10]
+        ).order_by("?")[:10]
 
         return context
 
@@ -30,13 +30,13 @@ class SearchResultsView(TemplateView):
         query = self.request.GET.get("q", "")
 
         if query:
-            context["found_artists"] = Artists.objects.filter(
+            context["found_artists"] = Artists.objects.with_genres().filter(
                 Q(name__icontains=query) | Q(genre__name__icontains=query)
-            ).prefetch_related("genre").distinct()
+            )
             context["found_genres"] = Genre.objects.filter(Q(name__icontains=query))
-            context["found_releases"] = Release.objects.filter(
+            context["found_releases"] = Release.objects.published_with_relations.filter(
                 Q(release_name__icontains=query) | Q(artists__name__icontains=query)
-            ).prefetch_related("artists","genres").distinct()
+            )
             context["query"] = query
         return context
 
