@@ -4,21 +4,30 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('artists', '0001_initial'),
-        ('users', '0001_initial'),
+        ("artists", "0001_initial"),
+        ("users", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='user',
-            name='favorite_artists',
-            field=models.ManyToManyField(blank=True, related_name='favorite_by', to='artists.artists', verbose_name='Улюблені виконавці'),
+            model_name="user",
+            name="favorite_artists",
+            field=models.ManyToManyField(
+                blank=True,
+                related_name="favorite_by",
+                to="artists.artists",
+                verbose_name="Улюблені виконавці",
+            ),
         ),
         migrations.AddField(
-            model_name='user',
-            name='favorite_releases',
-            field=models.ManyToManyField(blank=True, related_name='favorite_by', to='artists.release', verbose_name='Улюблені релізи'),
+            model_name="user",
+            name="favorite_releases",
+            field=models.ManyToManyField(
+                blank=True,
+                related_name="favorite_by",
+                to="artists.release",
+                verbose_name="Улюблені релізи",
+            ),
         ),
     ]

@@ -5,16 +5,16 @@ from django.utils.text import slugify
 
 class Genre(models.Model):
     name = models.CharField(max_length=100, verbose_name="Назва жанру", unique=True)
-    slug = models.SlugField(
-        max_length=250, unique=True, db_index=True
-    )
+    slug = models.SlugField(max_length=250, unique=True, db_index=True)
 
     def __str__(self):
         return self.name
 
+
 class ArtistsQuerySet(models.QuerySet):
     def with_genres(self):
         return self.prefetch_related("genre")
+
 
 class Artists(models.Model):
     TYPE_CHOICES = (("Artist", "Виконавець"), ("Band", "Гурт"))
@@ -25,29 +25,29 @@ class Artists(models.Model):
         verbose_name="Тип (гурт чи виконавець)",
         choices=TYPE_CHOICES,
     )
-    slug = models.SlugField(
-        max_length=250, unique=True, db_index=True
+    slug = models.SlugField(max_length=250, unique=True, db_index=True)
+    name = models.CharField(
+        max_length=100, verbose_name="Назва виконавця", db_index=True
     )
-    name = models.CharField(max_length=100, verbose_name="Назва виконавця",db_index=True)
     genre = models.ManyToManyField(Genre, verbose_name="Жанри")
-    description = models.TextField(max_length=5000, blank=True, null=True, verbose_name="Опис артиста")
+    description = models.TextField(
+        max_length=5000, blank=True, null=True, verbose_name="Опис артиста"
+    )
     is_fetched = models.BooleanField(default=False)
-    year_formed = (
-        models.PositiveIntegerField(
-            verbose_name="Дата створення гурту або артиста",db_index=True,
-            validators=[MinValueValidator(1900), MaxValueValidator(2026)],
-        )
+    year_formed = models.PositiveIntegerField(
+        verbose_name="Дата створення гурту або артиста",
+        db_index=True,
+        validators=[MinValueValidator(1900), MaxValueValidator(2026)],
     )
     image = models.ImageField(upload_to="artists", verbose_name="Фото артиста")
     objects = ArtistsQuerySet.as_manager()
 
     class Meta:
-        verbose_name='Artist'
-        verbose_name_plural='Artists'
+        verbose_name = "Artist"
+        verbose_name_plural = "Artists"
         indexes = [
-            models.Index(fields=["name",'year_formed']),
+            models.Index(fields=["name", "year_formed"]),
         ]
-
 
     def __str__(self):
         return f"{self.name}({self.get_artists_type_display()})"
@@ -77,7 +77,8 @@ class Track(models.Model):
 
 class ReleaseQuerySet(models.QuerySet):
     def published_with_relations(self):
-        return self.select_related("artists").prefetch_related("genres","tracks")
+        return self.select_related("artists").prefetch_related("genres", "tracks")
+
 
 class Release(models.Model):
     TYPE_CHOICES = (
@@ -100,12 +101,13 @@ class Release(models.Model):
     is_yt_fetched = models.BooleanField(default=False)
     release_name = models.CharField(max_length=50, verbose_name="Назва релізу")
     release_date = models.DateField(verbose_name="Дата видання релізу")
-    release_description = models.TextField(max_length=500, null=True, blank=True, verbose_name="Опис релізу")
+    release_description = models.TextField(
+        max_length=500, null=True, blank=True, verbose_name="Опис релізу"
+    )
     release_image = models.ImageField(
         upload_to="covers", verbose_name="Обкладинка альбому"
     )
     objects = ReleaseQuerySet.as_manager()
-
 
     def __str__(self):
         return f"{self.release_name}({self.get_release_type_display()})"

@@ -12,32 +12,31 @@ def fetch_and_save_album_data(release_id):
     except Release.DoesNotExist:
         return False
 
-    yt=YTMusic()
+    yt = YTMusic()
 
-    artist_name = release.artists.name if hasattr(release,'artists') else ""
+    artist_name = release.artists.name if hasattr(release, "artists") else ""
     query = f"{artist_name} {release.release_name}"
 
-    search_results = yt.search(query, filter='albums')
+    search_results = yt.search(query, filter="albums")
     if not search_results:
         return False
 
-    browse_id = search_results[0]['browseId']
+    browse_id = search_results[0]["browseId"]
     album_data = yt.get_album(browse_id)
 
-    if album_data.get('description') and not release.release_description:
-        release.release_description = album_data['description']
+    if album_data.get("description") and not release.release_description:
+        release.release_description = album_data["description"]
         release.save()
 
-    tracks = album_data.get('tracks',[])
-    for index, track_info in enumerate(tracks,start=1):
+    tracks = album_data.get("tracks", [])
+    for index, track_info in enumerate(tracks, start=1):
         Track.objects.update_or_create(
             release=release,
             position=index,
-            defaults = {
-                'title': track_info.get('title',''),
-                'duration':track_info.get('duration',''),
-
-            }
+            defaults={
+                "title": track_info.get("title", ""),
+                "duration": track_info.get("duration", ""),
+            },
         )
     return True
 
@@ -48,16 +47,12 @@ def fetch_and_save_artist_data(artist_id):
     except Artists.DoesNotExist:
         return False
 
-    if getattr(artist, 'is_fetched', False):
+    if getattr(artist, "is_fetched", False):
         return True
 
-    wikipedia.set_lang('en')
+    wikipedia.set_lang("en")
 
-    search_queries = [
-        artist.name,
-        f"{artist.name} (band)",
-        f"{artist.name} band"
-    ]
+    search_queries = [artist.name, f"{artist.name} (band)", f"{artist.name} band"]
 
     for query in search_queries:
         try:
@@ -67,7 +62,9 @@ def fetch_and_save_artist_data(artist_id):
 
             for page_title in search_results[:3]:  # Перевіряємо перші 3 результати
                 try:
-                    summary_text = wikipedia.summary(page_title, sentences=5, auto_suggest=False)
+                    summary_text = wikipedia.summary(
+                        page_title, sentences=5, auto_suggest=False
+                    )
 
                     # Відсіюємо сторінки неоднозначності
                     if "may refer to" not in summary_text.lower():
@@ -84,33 +81,31 @@ def fetch_and_save_artist_data(artist_id):
     return False
 
 
-def get_wikipedia_album_summary(album_name, artist_name, lang='en'):
+def get_wikipedia_album_summary(album_name, artist_name, lang="en"):
     user_agent = "MusicDataBaseApp/1.0 (contact@example.com)"
-    headers = {'User-Agent':user_agent}
-    query= f"{album_name} {artist_name} album"
+    headers = {"User-Agent": user_agent}
+    query = f"{album_name} {artist_name} album"
     search_url = f"https://{lang}.wikipedia.org/w/api.php"
     search_params = {
         "action": "query",
         "list": "search",
         "srsearch": query,
-        "format": "json"
+        "format": "json",
     }
     try:
-        response = requests.get(search_url, params=search_params, headers=headers).json()
-        results = response.get('query',{}).get('search',[])
+        response = requests.get(
+            search_url, params=search_params, headers=headers
+        ).json()
+        results = response.get("query", {}).get("search", [])
 
         if results:
-            page_title = results[0]['title']
+            page_title = results[0]["title"]
             summary_url = f"https://{lang}.wikipedia.org/api/rest_v1/page/summary/{requests.utils.quote(page_title)}"
             summary_res = requests.get(summary_url, headers=headers).json()
 
-            return summary_res.get('extract', '')
+            return summary_res.get("extract", "")
 
     except requests.RequestException as e:
         print(f" Error : {e}")
 
     return ""
-
-
-
-

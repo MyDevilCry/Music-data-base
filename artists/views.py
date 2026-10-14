@@ -8,7 +8,12 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 
 from artists.models import Artists, Genre, Release
-from artists.serializers import ArtistSerializer, ArtistDetailSerializer, ReleaseDetailSerializer, ReleaseSerializer
+from artists.serializers import (
+    ArtistSerializer,
+    ArtistDetailSerializer,
+    ReleaseDetailSerializer,
+    ReleaseSerializer,
+)
 from main.services import (
     fetch_and_save_album_data,
     fetch_and_save_artist_data,
@@ -26,7 +31,7 @@ class ArtistsDetailView(DetailView):
     def get_queryset(self):
         return super().get_queryset()
 
-    def get_object(self,queryset=None):
+    def get_object(self, queryset=None):
         artists = super().get_object(queryset)
 
         if not artists.is_fetched:
@@ -35,27 +40,23 @@ class ArtistsDetailView(DetailView):
 
         return artists
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["release_artist_detail"] = Release.objects.published_with_relations().filter(
-            artists=self.object
+        context["release_artist_detail"] = (
+            Release.objects.published_with_relations().filter(artists=self.object)
         )
         return context
 
-@login_required
 
-def toggle_favorite_artists(request,slug):
-    artist=get_object_or_404(Artists,slug=slug)
+@login_required
+def toggle_favorite_artists(request, slug):
+    artist = get_object_or_404(Artists, slug=slug)
     if artist in request.user.favorite_artists.all():
         request.user.favorite_artists.remove(artist)
     else:
         request.user.favorite_artists.add(artist)
 
-    return redirect('artists:artists_detail',slug=slug)
-
-
-
+    return redirect("artists:artists_detail", slug=slug)
 
 
 class GenreDetailView(ListView):
@@ -64,16 +65,13 @@ class GenreDetailView(ListView):
     context_object_name = "artists"
 
     def get_queryset(self):
-        genre_slug = self.kwargs['slug']
+        genre_slug = self.kwargs["slug"]
         return Artists.objects.filter(genre__slug=genre_slug).with_genre()
 
-
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["genre"] = Genre.objects.get(slug=self.kwargs["slug"])
         return context
-
-
 
 
 class ReleasesView(ListView):
@@ -93,7 +91,7 @@ class ReleasesDetailView(DetailView):
     def get_queryset(self):
         return Release.objects.published_with_relations()
 
-    def get_object(self, queryset = None):
+    def get_object(self, queryset=None):
         obj = super().get_object(queryset)
 
         if not obj.tracks.exists():
@@ -102,13 +100,14 @@ class ReleasesDetailView(DetailView):
 
         if not obj.release_description:
             artist_name = obj.artists.name if obj.artists else ""
-            wiki_summary = get_wikipedia_album_summary(obj.release_name,artist_name)
+            wiki_summary = get_wikipedia_album_summary(obj.release_name, artist_name)
 
             if wiki_summary:
                 obj.release_description = wiki_summary
                 obj.save()
 
         return obj
+
 
 @login_required
 def toggle_favorite_releases(request, slug):
@@ -118,30 +117,30 @@ def toggle_favorite_releases(request, slug):
     else:
         request.user.favorite_releases.add(release)
 
-    return redirect('artists:releases_detail', slug=slug)
+    return redirect("artists:releases_detail", slug=slug)
 
 
 class ArtistViewSet(viewsets.ModelViewSet):
-    queryset = Artists.objects.prefetch_related('genre').all()
+    queryset = Artists.objects.prefetch_related("genre").all()
     filter_backends = [SearchFilter]
-    search_fields = ('name','slug','year_formed','genre__name')
+    search_fields = ("name", "slug", "year_formed", "genre__name")
     permission_class = [IsAuthenticatedOrReadOnly]
-    lookup_field = 'slug'
+    lookup_field = "slug"
 
     def get_serializer_class(self):
-        if self.action == 'retrieve':
+        if self.action == "retrieve":
             return ArtistDetailSerializer
         return ArtistSerializer
 
 
 class ReleaseViewSet(viewsets.ModelViewSet):
-    queryset = Release.objects.prefetch_related('genres','artists').all()
+    queryset = Release.objects.prefetch_related("genres", "artists").all()
     filter_backends = [SearchFilter]
-    search_fields = ('name','slug','year_formed','release__name')
+    search_fields = ("name", "slug", "year_formed", "release__name")
     permission_class = [IsAuthenticatedOrReadOnly]
-    lookup_field = 'slug'
+    lookup_field = "slug"
 
     def get_serializer_class(self):
-        if self.action == 'retrieve':
+        if self.action == "retrieve":
             return ReleaseDetailSerializer
         return ReleaseSerializer

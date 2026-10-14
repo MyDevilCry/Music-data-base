@@ -7,17 +7,20 @@ from artists.models import Artists, Genre, Release
 class MainView(TemplateView):
     template_name = "main.html"
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["artists"] = Artists.objects.with_genres().order_by("?")[:10]
         context["genres"] = Genre.objects.order_by("?")[:16]
-        context["random_release"] = Release.objects.published_with_relations().filter(
-            release_type__in=[
-                "Album",
-                "EP",
-            ]
-        ).order_by("?")[:10]
+        context["random_release"] = (
+            Release.objects.published_with_relations()
+            .filter(
+                release_type__in=[
+                    "Album",
+                    "EP",
+                ]
+            )
+            .order_by("?")[:10]
+        )
 
         return context
 
@@ -39,16 +42,3 @@ class SearchResultsView(TemplateView):
             )
             context["query"] = query
         return context
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -33,4 +33,3 @@ class ReleasesAdmin(admin.ModelAdmin):
     search_fields = ("name",)
     prepopulated_fields = {"slug": ("release_name",)}
     autocomplete_fields = ("genres", "artists")
-
