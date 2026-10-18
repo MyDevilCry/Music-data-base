@@ -2,7 +2,6 @@ import requests
 import wikipedia
 from ytmusicapi import YTMusic
 
-
 from artists.models import Artists, Release, Track
 
 

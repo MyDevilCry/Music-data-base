@@ -35,7 +35,6 @@ class UserProfileView(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         return self.request.user
 
-
 def logout(request):
     auth.logout(request)
     return redirect("main:main")

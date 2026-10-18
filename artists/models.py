@@ -1,3 +1,4 @@
+
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.text import slugify
@@ -39,15 +40,16 @@ class Artists(models.Model):
         db_index=True,
         validators=[MinValueValidator(1900), MaxValueValidator(2026)],
     )
+    is_favorite = models.BooleanField(default=False)
     image = models.ImageField(upload_to="artists", verbose_name="Фото артиста")
     objects = ArtistsQuerySet.as_manager()
 
     class Meta:
         verbose_name = "Artist"
         verbose_name_plural = "Artists"
-        indexes = [
+        indexes = (
             models.Index(fields=["name", "year_formed"]),
-        ]
+        )
 
     def __str__(self):
         return f"{self.name}({self.get_artists_type_display()})"

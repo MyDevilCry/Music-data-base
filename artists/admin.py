@@ -21,7 +21,7 @@ class ArtistsAdmin(admin.ModelAdmin):
 class GenreAdmin(admin.ModelAdmin):
     list_display = ("name",)
     search_fields = ("name",)
-    prepopulated_fields = {"slug": ("name",)}
+    prepopulated_fields = {"slug": ("name",)}   # noqa: RUF012
 
 
 @admin.register(Release)
@@ -31,5 +31,5 @@ class ReleasesAdmin(admin.ModelAdmin):
         "release_type",
     )
     search_fields = ("name",)
-    prepopulated_fields = {"slug": ("release_name",)}
+    prepopulated_fields = {"slug": ("release_name",)} # noqa: RUF012
     autocomplete_fields = ("genres", "artists")

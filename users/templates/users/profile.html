@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="fav-artists-grid">
-                    {% for artist in user.favorite_artists.all %}
+                    {% for artist in user.favorite_artists.all%}
                         <div class="fav-artist-item">
                             <a href="{% url 'artists:artists_detail' artist.slug %}" class="fav-artist-link">
 

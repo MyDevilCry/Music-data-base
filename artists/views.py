@@ -6,11 +6,10 @@ from rest_framework import viewsets
 from rest_framework.filters import SearchFilter
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
-
 from artists.models import Artists, Genre, Release
 from artists.serializers import (
-    ArtistSerializer,
     ArtistDetailSerializer,
+    ArtistSerializer,
     ReleaseDetailSerializer,
     ReleaseSerializer,
 )
@@ -28,6 +27,9 @@ class ArtistsDetailView(DetailView):
     template_name = "artists_detail.html"
     context_object_name = "artist"
 
+
+
+
     def get_queryset(self):
         return super().get_queryset()
 
@@ -40,12 +42,15 @@ class ArtistsDetailView(DetailView):
 
         return artists
 
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["release_artist_detail"] = (
             Release.objects.published_with_relations().filter(artists=self.object)
         )
         return context
+
+
 
 
 @login_required
@@ -88,6 +93,8 @@ class ReleasesDetailView(DetailView):
     template_name = "releases_detail.html"
     context_object_name = "release"
 
+
+
     def get_queryset(self):
         return Release.objects.published_with_relations()
 
@@ -110,6 +117,7 @@ class ReleasesDetailView(DetailView):
 
 
 @login_required
+
 def toggle_favorite_releases(request, slug):
     release = get_object_or_404(Release, slug=slug)
     if release in request.user.favorite_releases.all():
@@ -119,12 +127,11 @@ def toggle_favorite_releases(request, slug):
 
     return redirect("artists:releases_detail", slug=slug)
 
-
 class ArtistViewSet(viewsets.ModelViewSet):
     queryset = Artists.objects.prefetch_related("genre").all()
     filter_backends = [SearchFilter]
     search_fields = ("name", "slug", "year_formed", "genre__name")
-    permission_class = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     lookup_field = "slug"
 
     def get_serializer_class(self):
@@ -137,7 +144,7 @@ class ReleaseViewSet(viewsets.ModelViewSet):
     queryset = Release.objects.prefetch_related("genres", "artists").all()
     filter_backends = [SearchFilter]
     search_fields = ("name", "slug", "year_formed", "release__name")
-    permission_class = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     lookup_field = "slug"
 
     def get_serializer_class(self):

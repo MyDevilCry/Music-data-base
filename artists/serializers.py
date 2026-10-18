@@ -1,4 +1,5 @@
 from rest_framework import serializers
+
 from artists.models import Artists, Release
 
 
@@ -19,7 +20,7 @@ class ArtistDetailSerializer(serializers.ModelSerializer):
 class ReleaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Release
-        fields = ["slug", "release_name", "release_date", "release_image"]
+        fields = ("slug", "release_name", "release_date", "release_image")
 
 
 class ReleaseDetailSerializer(serializers.ModelSerializer):

@@ -5,7 +5,6 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from config import settings
 
-
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("artist/", include("artists.urls", namespace="artists")),
