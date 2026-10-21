@@ -4,6 +4,7 @@ from django.db import models
 from django.utils.text import slugify
 
 
+
 class Genre(models.Model):
     name = models.CharField(max_length=100, verbose_name="Назва жанру", unique=True)
     slug = models.SlugField(max_length=250, unique=True, db_index=True)
@@ -40,7 +41,10 @@ class Artists(models.Model):
         db_index=True,
         validators=[MinValueValidator(1900), MaxValueValidator(2026)],
     )
-    is_favorite = models.BooleanField(default=False)
+    favorite_for_artists = models.ManyToManyField("users.User",
+                                          related_name="favorite_artists",
+                                          blank=True,
+                                          verbose_name="В обраному у користувачів")
     image = models.ImageField(upload_to="artists", verbose_name="Фото артиста")
     objects = ArtistsQuerySet.as_manager()
 
@@ -106,6 +110,10 @@ class Release(models.Model):
     release_description = models.TextField(
         max_length=500, null=True, blank=True, verbose_name="Опис релізу"
     )
+    favorite_for_releases = models.ManyToManyField("users.User",
+                                          related_name="favorite_releases",
+                                          blank=True,
+                                          verbose_name="В обраному у користувачів")
     release_image = models.ImageField(
         upload_to="covers", verbose_name="Обкладинка альбому"
     )

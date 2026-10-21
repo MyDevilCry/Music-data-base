@@ -71,6 +71,7 @@
                 <h3 class="section-title fw-bold text-white mb-4">Albums & Releases</h3>
                 <div class="releases-grid d-flex flex-wrap gap-3">
                     {% for release in found_releases %}
+                    <a href="{% url 'artists:releases_detail' release.slug %}" class="album-artist-card">
                         <div class="release-card card bg-dark text-white border-0 shadow-sm rounded-3 p-2">
                             <div class="release-cover-wrapper position-relative overflow-hidden rounded-2 mb-2">
                                 {% if release.release_image %}

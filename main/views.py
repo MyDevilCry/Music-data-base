@@ -37,7 +37,7 @@ class SearchResultsView(TemplateView):
                 Q(name__icontains=query) | Q(genre__name__icontains=query)
             )
             context["found_genres"] = Genre.objects.filter(Q(name__icontains=query))
-            context["found_releases"] = Release.objects.published_with_relations.filter(
+            context["found_releases"] = Release.objects.published_with_relations().filter(
                 Q(release_name__icontains=query) | Q(artists__name__icontains=query)
             )
             context["query"] = query

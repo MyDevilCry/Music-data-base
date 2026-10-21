@@ -71,7 +71,7 @@ class GenreDetailView(ListView):
 
     def get_queryset(self):
         genre_slug = self.kwargs["slug"]
-        return Artists.objects.filter(genre__slug=genre_slug).with_genre()
+        return Artists.objects.with_genres().filter(genre__slug=genre_slug)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
